@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="hlsl">
+      <UniqueIdentifier>{20f837d9-dc9d-40bd-9ed2-afaeb4e058a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="h">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="manager.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="polygon2D.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="field.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="model.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="bullet.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="explosion.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="skydoom.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="title.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="result.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="audio.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_life.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_sp.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="white.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="spawn.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="manager.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="polygon2D.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="field.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="model.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="gameobject.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="bullet.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="explosion.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="skydoom.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="title.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="result.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="audio.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="Toul.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_life.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_sp.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="white.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="spawn.h">
+      <Filter>h</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="common.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="unlitTexturePS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="unlitTextureVS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="vertexLightingPS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="vertexLightingVS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
