@@ -31,9 +31,9 @@ void Game::Init()
 	AddGameObject<UI>(2);
 	AddGameObject<Field>(1);
 	AddGameObject<Spawn>(1);
-	AddGameObject<Enemy>(1)->SetEnemy(D3DXVECTOR3(0.0f, -20.0f, 5.0f),BWMode::black);
-	AddGameObject<Enemy>(1)->SetEnemy(D3DXVECTOR3(3.0f, -20.0f, 6.0f), BWMode::white);
-	AddGameObject<Enemy>(1)->SetPosition(D3DXVECTOR3(-3.0f, -20.0f, -2.0f));
+	AddGameObject<Enemy>(1)->SetEnemy(D3DXVECTOR3(0.0f, -20.3f, 5.0f),BWMode::black);
+	AddGameObject<Enemy>(1)->SetEnemy(D3DXVECTOR3(3.0f, -20.3f, 6.0f), BWMode::white);
+	AddGameObject<Enemy>(1)->SetEnemy(D3DXVECTOR3(-3.0f, -20.3f, -2.0f),BWMode::black);
 	AddGameObject<Player>(1);
 
 	//Audio* bgm = AddGameObject<Audio>(2);

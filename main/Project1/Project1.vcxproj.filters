@@ -151,6 +151,9 @@
     <ClInclude Include="spawn.h">
       <Filter>h</Filter>
     </ClInclude>
+    <ClInclude Include="time.h">
+      <Filter>h</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="common.hlsl">

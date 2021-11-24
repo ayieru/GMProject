@@ -1,0 +1,87 @@
+﻿  compilation object save succeeded; see F:\GMProject\main\Project1\unlitTexturePS.cso
+  compilation object save succeeded; see F:\GMProject\main\Project1\unlitTextureVS.cso
+  compilation object save succeeded; see F:\GMProject\main\Project1\vertexLightingPS.cso
+  compilation object save succeeded; see F:\GMProject\main\Project1\vertexLightingVS.cso
+  audio.cpp
+  bullet.cpp
+  camera.cpp
+  enemy.cpp
+  explosion.cpp
+  field.cpp
+  game.cpp
+  main.cpp
+  manager.cpp
+  model.cpp
+  player.cpp
+  polygon2D.cpp
+  renderer.cpp
+  result.cpp
+F:\GMProject\main\Project1\result.cpp(13,13): warning C4101: 'title': ローカル変数は 1 度も使われていません。
+  skydoom.cpp
+  spawn.cpp
+  title.cpp
+F:\GMProject\main\Project1\title.cpp(13,13): warning C4101: 'title': ローカル変数は 1 度も使われていません。
+  UI.cpp
+  UI_life.cpp
+  UI_sp.cpp
+  コードを生成中...
+  コンパイル中...
+  white.cpp
+  コードを生成中...
+player.obj : error LNK2001: 外部シンボル D3DXMatrixMultiply は未解決です
+skydoom.obj : error LNK2001: 外部シンボル D3DXMatrixMultiply は未解決です
+UI.obj : error LNK2001: 外部シンボル D3DXMatrixMultiply は未解決です
+white.obj : error LNK2001: 外部シンボル D3DXMatrixMultiply は未解決です
+bullet.obj : error LNK2001: 外部シンボル D3DXMatrixMultiply は未解決です
+enemy.obj : error LNK2001: 外部シンボル D3DXMatrixMultiply は未解決です
+explosion.obj : error LNK2001: 外部シンボル D3DXMatrixMultiply は未解決です
+field.obj : error LNK2001: 外部シンボル D3DXMatrixMultiply は未解決です
+player.obj : error LNK2001: 外部シンボル D3DXMatrixScaling は未解決です
+skydoom.obj : error LNK2001: 外部シンボル D3DXMatrixScaling は未解決です
+UI.obj : error LNK2001: 外部シンボル D3DXMatrixScaling は未解決です
+white.obj : error LNK2001: 外部シンボル D3DXMatrixScaling は未解決です
+bullet.obj : error LNK2001: 外部シンボル D3DXMatrixScaling は未解決です
+enemy.obj : error LNK2001: 外部シンボル D3DXMatrixScaling は未解決です
+explosion.obj : error LNK2001: 外部シンボル D3DXMatrixScaling は未解決です
+field.obj : error LNK2001: 外部シンボル D3DXMatrixScaling は未解決です
+player.obj : error LNK2001: 外部シンボル D3DXMatrixTranslation は未解決です
+skydoom.obj : error LNK2001: 外部シンボル D3DXMatrixTranslation は未解決です
+UI.obj : error LNK2001: 外部シンボル D3DXMatrixTranslation は未解決です
+white.obj : error LNK2001: 外部シンボル D3DXMatrixTranslation は未解決です
+bullet.obj : error LNK2001: 外部シンボル D3DXMatrixTranslation は未解決です
+enemy.obj : error LNK2001: 外部シンボル D3DXMatrixTranslation は未解決です
+explosion.obj : error LNK2001: 外部シンボル D3DXMatrixTranslation は未解決です
+field.obj : error LNK2001: 外部シンボル D3DXMatrixTranslation は未解決です
+player.obj : error LNK2001: 外部シンボル D3DXMatrixRotationYawPitchRoll は未解決です
+skydoom.obj : error LNK2001: 外部シンボル D3DXMatrixRotationYawPitchRoll は未解決です
+bullet.obj : error LNK2001: 外部シンボル D3DXMatrixRotationYawPitchRoll は未解決です
+camera.obj : error LNK2001: 外部シンボル D3DXMatrixRotationYawPitchRoll は未解決です
+enemy.obj : error LNK2001: 外部シンボル D3DXMatrixRotationYawPitchRoll は未解決です
+field.obj : error LNK2001: 外部シンボル D3DXMatrixRotationYawPitchRoll は未解決です
+camera.obj : error LNK2019: 未解決の外部シンボル D3DXMatrixLookAtLH が関数 "public: virtual void __cdecl Camera::Draw(void)" (?Draw@Camera@@UEAAXXZ) で参照されました
+camera.obj : error LNK2019: 未解決の外部シンボル D3DXMatrixPerspectiveFovLH が関数 "public: virtual void __cdecl Camera::Draw(void)" (?Draw@Camera@@UEAAXXZ) で参照されました
+explosion.obj : error LNK2019: 未解決の外部シンボル D3DXMatrixInverse が関数 "public: virtual void __cdecl Explosion::Draw(void)" (?Draw@Explosion@@UEAAXXZ) で参照されました
+field.obj : error LNK2001: 外部シンボル D3DXMatrixInverse は未解決です
+UI.obj : error LNK2001: 外部シンボル D3DXMatrixInverse は未解決です
+white.obj : error LNK2001: 外部シンボル D3DXMatrixInverse は未解決です
+UI.obj : error LNK2001: 外部シンボル D3DX11CreateShaderResourceViewFromFileA は未解決です
+UI_life.obj : error LNK2001: 外部シンボル D3DX11CreateShaderResourceViewFromFileA は未解決です
+UI_sp.obj : error LNK2001: 外部シンボル D3DX11CreateShaderResourceViewFromFileA は未解決です
+white.obj : error LNK2001: 外部シンボル D3DX11CreateShaderResourceViewFromFileA は未解決です
+explosion.obj : error LNK2001: 外部シンボル D3DX11CreateShaderResourceViewFromFileA は未解決です
+field.obj : error LNK2001: 外部シンボル D3DX11CreateShaderResourceViewFromFileA は未解決です
+model.obj : error LNK2001: 外部シンボル D3DX11CreateShaderResourceViewFromFileA は未解決です
+polygon2D.obj : error LNK2001: 外部シンボル D3DX11CreateShaderResourceViewFromFileA は未解決です
+player.obj : error LNK2019: 未解決の外部シンボル D3DXMatrixRotationQuaternion が関数 "public: virtual void __cdecl Player::Draw(void)" (?Draw@Player@@UEAAXXZ) で参照されました
+player.obj : error LNK2019: 未解決の外部シンボル D3DXQuaternionRotationAxis が関数 "public: virtual void __cdecl Player::Update(void)" (?Update@Player@@UEAAXXZ) で参照されました
+player.obj : error LNK2019: 未解決の外部シンボル D3DXQuaternionMultiply が関数 "public: struct D3DXQUATERNION & __cdecl D3DXQUATERNION::operator*=(struct D3DXQUATERNION const &)" (??XD3DXQUATERNION@@QEAAAEAU0@AEBU0@@Z) で参照されました
+renderer.obj : error LNK2019: 未解決の外部シンボル D3D11CreateDeviceAndSwapChain が関数 "public: static void __cdecl Renderer::Init(void)" (?Init@Renderer@@SAXXZ) で参照されました
+renderer.obj : error LNK2019: 未解決の外部シンボル D3DXVec4Normalize が関数 "public: static void __cdecl Renderer::Init(void)" (?Init@Renderer@@SAXXZ) で参照されました
+renderer.obj : error LNK2019: 未解決の外部シンボル D3DXMatrixTranspose が関数 "public: static void __cdecl Renderer::SetProjectionMatrix(struct D3DXMATRIX *)" (?SetProjectionMatrix@Renderer@@SAXPEAUD3DXMATRIX@@@Z) で参照されました
+renderer.obj : error LNK2019: 未解決の外部シンボル D3DXMatrixOrthoOffCenterLH が関数 "public: static void __cdecl Renderer::SetWorldViewProjection2D(void)" (?SetWorldViewProjection2D@Renderer@@SAXXZ) で参照されました
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\lib\x86\d3d9.lib : warning LNK4272: ライブラリのコンピューターの種類 'x86' がターゲットのコンピューターの種類' x64' と競合しています
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\lib\x86\d3dx9d.lib : warning LNK4272: ライブラリのコンピューターの種類 'x86' がターゲットのコンピューターの種類' x64' と競合しています
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\lib\x86\d3d11.lib : warning LNK4272: ライブラリのコンピューターの種類 'x86' がターゲットのコンピューターの種類' x64' と競合しています
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\lib\x86\d3dx9.lib : warning LNK4272: ライブラリのコンピューターの種類 'x86' がターゲットのコンピューターの種類' x64' と競合しています
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\lib\x86\d3dx11.lib : warning LNK4272: ライブラリのコンピューターの種類 'x86' がターゲットのコンピューターの種類' x64' と競合しています
+F:\GMProject\main\x64\Debug\Project1.exe : fatal error LNK1120: 15 件の未解決の外部参照

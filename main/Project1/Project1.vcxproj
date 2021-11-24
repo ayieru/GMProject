@@ -196,6 +196,7 @@
     <ClInclude Include="bullet.h" />
     <ClInclude Include="skydoom.h" />
     <ClInclude Include="spawn.h" />
+    <ClInclude Include="time.h" />
     <ClInclude Include="title.h" />
     <ClInclude Include="Toul.h" />
     <ClInclude Include="UI.h" />
