@@ -33,10 +33,10 @@ void Player::Init()
 
 	Renderer::CreatePixelShader(&PixelShader, "vertexLightingPS.cso");
 
-	Position = D3DXVECTOR3(-16.0f, -18.3f, -16.0f);
+	Position = D3DXVECTOR3(-16.0f, -21.3f, -16.0f);
 	Scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 
-	D3DXQuaternionIdentity(&_Quaternion);
+	D3DXQuaternionIdentity(&Quaternion);
 }
 
 void Player::Uninit()
@@ -80,7 +80,7 @@ void Player::Update()
 			bgm->Load("Asset\\Audio\\02.wav");
 			//bgm->Play(false);
 			Manager::GetScene()->AddGameObject<Bullet>(1)->
-				SetBullet(Position + D3DXVECTOR3(0.f, -1.7f, 0.f),forward,Mode);
+				SetBullet(Position + D3DXVECTOR3(0.f, 1.f, 0.f),forward,Mode);
 		}
 		a++;
 
@@ -95,30 +95,30 @@ void Player::Update()
 	//sp
 	if (GetAsyncKeyState(VK_L)) {
 		Scene* scene = Manager::GetScene();
-		if (c == 0) {
+		if (intervaltime == 0) {
 			if (scene->GetGameObject<UI>(2)->GetSpecial() > 0) {
 				scene->AddGameObject<White>(1);
 				std::vector<Enemy*> lifelist = scene->GetGameObjects<Enemy>(1);
-				for (Enemy* life : lifelist) {
-					life->SetDestroy();
+				for (Enemy* enemy : lifelist) {
+					enemy->SetDestroy();
 				}
 				std::vector<Bullet*> bulletlist = scene->GetGameObjects<Bullet>(1);
 				for (Bullet* life : bulletlist) {
 					life->SetDestroy();
 				}
 				scene->GetGameObject<UI>(2)->UseSpecial();
-				c++;
+				intervaltime++;
 			}
 		}
 		else {
-			c++;
+			intervaltime++;
 		}
 	}
-	else if (c != 0 && c <= 200) {
-		c++;
+	else if (intervaltime != 0 && intervaltime <= 200) {
+		intervaltime++;
 	}
 	else {
-		c = 0;
+		intervaltime = 0;
 	}
 
 	//切り替え
@@ -146,25 +146,25 @@ void Player::Update()
 		D3DXQUATERNION quat;
 		D3DXVECTOR3 axis = D3DXVECTOR3(1.f, 0.f, 0.f);
 		D3DXQuaternionRotationAxis(&quat, &axis, 0.1f);
-		_Quaternion *= quat;
+		Quaternion *= quat;
 	}
 	if (GetAsyncKeyState(VK_S)) {
 		D3DXQUATERNION quat;
 		D3DXVECTOR3 axis = D3DXVECTOR3(1.f, 0.f, 0.f);
 		D3DXQuaternionRotationAxis(&quat, &axis, -0.1f);
-		_Quaternion *= quat;
+		Quaternion *= quat;
 	}
 	if (GetAsyncKeyState(VK_D)) {
 		D3DXQUATERNION quat;
 		D3DXVECTOR3 axis = D3DXVECTOR3(0.f, 0.f, 1.f);
 		D3DXQuaternionRotationAxis(&quat, &axis, -0.1f);
-		_Quaternion *= quat;
+		Quaternion *= quat;
 	}
 	if (GetAsyncKeyState(VK_A)) {
 		D3DXQUATERNION quat;
 		D3DXVECTOR3 axis = D3DXVECTOR3(0.f, 0.f, 1.f);
 		D3DXQuaternionRotationAxis(&quat, &axis, 0.1f);
-		_Quaternion *= quat;
+		Quaternion *= quat;
 	}
 
 
@@ -181,8 +181,8 @@ void Player::Draw()
 	//ワールドマトリクス設定
 	D3DXMATRIX world, s, r, t;
 	D3DXMatrixScaling(&s, Scale.x, Scale.y, Scale.z);
-	D3DXMatrixRotationQuaternion(&r, &_Quaternion);
-	D3DXMatrixTranslation(&t, Position.x, Position.y - 2.0f, Position.z);
+	D3DXMatrixRotationQuaternion(&r, &Quaternion);
+	D3DXMatrixTranslation(&t, Position.x, Position.y, Position.z);
 	world = s * r * t;
 	Renderer::SetWorldMatrix(&world);
 

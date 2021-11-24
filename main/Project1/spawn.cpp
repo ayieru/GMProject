@@ -2,7 +2,6 @@
 #include "manager.h"
 #include "renderer.h"
 
-
 #include "result.h"
 #include "spawn.h"
 #include "game.h"
@@ -40,7 +39,6 @@ void Spawn::Init()
 	{1660,SCREEN_WIDTH,SCREEN_HEIGHT * 0.4f },
 	{1680,SCREEN_WIDTH,SCREEN_HEIGHT * 0.5f },
 	{1720,SCREEN_WIDTH,SCREEN_HEIGHT * 0.6f },
-	{-1,0,0 },
 	};
 }
 
@@ -56,6 +54,11 @@ void Spawn::Update()
 	if (frame > 3000) {
 		//Manager::SetScene<Result>();
 	}
+
+	for (int i = 0; i < max; i++) {
+
+	}
+
 }
 
 void Spawn::Draw()

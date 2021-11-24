@@ -45,7 +45,7 @@ void Enemy::Update()
 
 	if (a != 0) {
 		Manager::GetScene()->AddGameObject<Bullet>(1)->
-			SetBullet(Position + D3DXVECTOR3(0.0f, 1.7f, 0.0f), GetForward(),Mode);
+			SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), GetForward(),Mode);
 	}
 	a++;
 
