@@ -4,41 +4,42 @@
 
 #include "result.h"
 #include "spawn.h"
+#include "enemy.h"
 #include "game.h"
 
 void Spawn::Init()
 {
-	Spawn::EnemySpawn EnemySpawnData[] = {
-	{60,SCREEN_WIDTH,SCREEN_HEIGHT * 0.5f },
-	{120,SCREEN_WIDTH,SCREEN_HEIGHT * 0.2f },
-	{320,SCREEN_WIDTH,SCREEN_HEIGHT * 0.25f },
-	{320,SCREEN_WIDTH,SCREEN_HEIGHT * 0.5f },
-	{320,SCREEN_WIDTH,SCREEN_HEIGHT * 0.75f },
-	{320,SCREEN_WIDTH,SCREEN_HEIGHT * 0.8f },
-	{700,SCREEN_WIDTH,SCREEN_HEIGHT * 0.2f },
-	{720,SCREEN_WIDTH,SCREEN_HEIGHT * 0.3f },
-	{740,SCREEN_WIDTH,SCREEN_HEIGHT * 0.4f },
-	{760,SCREEN_WIDTH,SCREEN_HEIGHT * 0.5f },
-	{1000,SCREEN_WIDTH,SCREEN_HEIGHT * 0.5f },
-	{1000,SCREEN_WIDTH,SCREEN_HEIGHT * 0.2f },
-	{1070,SCREEN_WIDTH,SCREEN_HEIGHT * 0.25f },
-	{1070,SCREEN_WIDTH,SCREEN_HEIGHT * 0.5f },
-	{1070,SCREEN_WIDTH,SCREEN_HEIGHT * 0.75f },
-	{1100,SCREEN_WIDTH,SCREEN_HEIGHT * 0.2f },
-	{1100,SCREEN_WIDTH,SCREEN_HEIGHT * 0.3f },
-	{1100,SCREEN_WIDTH,SCREEN_HEIGHT * 0.4f },
-	{1100,SCREEN_WIDTH,SCREEN_HEIGHT * 0.5f },
-	{1100,SCREEN_WIDTH,SCREEN_HEIGHT * 0.6f },
-	{1500,SCREEN_WIDTH,SCREEN_HEIGHT * 0.5f },
-	{1520,SCREEN_WIDTH,SCREEN_HEIGHT * 0.2f },
-	{1540,SCREEN_WIDTH,SCREEN_HEIGHT * 0.25f },
-	{1560,SCREEN_WIDTH,SCREEN_HEIGHT * 0.5f },
-	{1580,SCREEN_WIDTH,SCREEN_HEIGHT * 0.75f },
-	{1620,SCREEN_WIDTH,SCREEN_HEIGHT * 0.2f },
-	{1640,SCREEN_WIDTH,SCREEN_HEIGHT * 0.3f },
-	{1660,SCREEN_WIDTH,SCREEN_HEIGHT * 0.4f },
-	{1680,SCREEN_WIDTH,SCREEN_HEIGHT * 0.5f },
-	{1720,SCREEN_WIDTH,SCREEN_HEIGHT * 0.6f },
+	SpawnData = {
+	{60,0.f,20.f },
+	{120,-20.f,20.f },
+	{320,0.f,20.f },
+	{320,-20.f,20.f },
+	{320,0.f,20.f },
+	{320,0.f,20.f },
+	{700,0.f,20.f },
+	{720,0.f,20.f },
+	{740,0.f,20.f },
+	{760,0.f,20.f },
+	{1000,0.f,20.f },
+	{1000,0.f,20.f },
+	{1070,0.f,20.f },
+	{1070,0.f,20.f },
+	{1070,0.f,20.f },
+	{1100,0.f,20.f },
+	{1100,0.f,20.f },
+	{1100,0.f,20.f },
+	{1100,-40.f,20.f },
+	{1100,0.f,20.f },
+	{1500,0.f,20.f },
+	{1520,0.f,20.f },
+	{1540,0.f,20.f },
+	{1560,0.f,20.f },
+	{1580,0.f,20.f },
+	{1620,0.f,20.f },
+	{1640,0.f,20.f },
+	{1660,0.f,20.f },
+	{1680,0.f,20.f },
+	{1720,0.f,20.f },
 	};
 }
 
@@ -55,10 +56,12 @@ void Spawn::Update()
 		//Manager::SetScene<Result>();
 	}
 
-	for (int i = 0; i < max; i++) {
-
+	for (auto q : SpawnData) {
+		if (frame == q.spawn_frame) {
+			D3DXVECTOR3 pos = D3DXVECTOR3(q.x, -20.3f, q.y);
+			Manager::GetScene()->AddGameObject<Enemy>(1)->SetEnemy(pos, BWMode::black);
+		}
 	}
-
 }
 
 void Spawn::Draw()

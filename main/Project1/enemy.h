@@ -2,6 +2,8 @@
 
 #include "gameobject.h"
 
+class Model;
+
 class Enemy : public GameObject
 {
 private:

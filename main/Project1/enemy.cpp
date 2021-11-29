@@ -52,6 +52,8 @@ void Enemy::Update()
 	if (a > 10) {
 		a = 0;
 	}
+
+	Position.z -= 0.1f;
 }
 
 void Enemy::Draw()
