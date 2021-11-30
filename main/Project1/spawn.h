@@ -1,11 +1,13 @@
 #pragma once
 #include "gameobject.h"
 #include <list>
+#include <algorithm>
 
 struct EnemySpawn
 {
 	int spawn_frame;
-	float x, y;
+	float x;
+	float y;
 
 };
 
@@ -16,7 +18,8 @@ private:
 	int max = 31;
 	int frame;
 
-	std::list<EnemySpawn> SpawnData;
+	EnemySpawn Data[];
+	std::list<EnemySpawn*> SpawnData;
 
 public:
 	void Init();

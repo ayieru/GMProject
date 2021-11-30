@@ -2,8 +2,10 @@
 #define GAMEOBJECT_MAX (100)
 
 enum class BWMode {
-    black,
-    white,
+    pblack,
+    pwhite,
+    eblack,
+    ewhite,
 };
 
 class GameObject

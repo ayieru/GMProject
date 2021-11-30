@@ -21,7 +21,7 @@ void Enemy::Init()
 	Position = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	Rotation = D3DXVECTOR3(0.0f, 1.0f, 1.0f);
 	Scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
-	Mode = BWMode::black;
+	Mode = BWMode::pblack;
 
 	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "vertexLightingVS.cso");
 
@@ -72,7 +72,7 @@ void Enemy::Draw()
 	world = s * r * t;
 	Renderer::SetWorldMatrix(&world);
 
-	if (Mode == BWMode::black) {
+	if (Mode==BWMode::eblack) {
 		EnemyModel->Draw();
 	}
 	else {

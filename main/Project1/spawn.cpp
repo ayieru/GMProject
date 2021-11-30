@@ -9,7 +9,7 @@
 
 void Spawn::Init()
 {
-	SpawnData = {
+	Data[] = {
 	{60,0.f,20.f },
 	{120,-20.f,20.f },
 	{320,0.f,20.f },
@@ -30,17 +30,22 @@ void Spawn::Init()
 	{1100,0.f,20.f },
 	{1100,-40.f,20.f },
 	{1100,0.f,20.f },
-	{1500,0.f,20.f },
-	{1520,0.f,20.f },
-	{1540,0.f,20.f },
-	{1560,0.f,20.f },
-	{1580,0.f,20.f },
-	{1620,0.f,20.f },
-	{1640,0.f,20.f },
-	{1660,0.f,20.f },
-	{1680,0.f,20.f },
-	{1720,0.f,20.f },
+	{1100,0.f,20.f },
+	{1120,0.f,20.f },
+	{1140,0.f,20.f },
+	{1160,0.f,20.f },
+	{1180,0.f,20.f },
+	{1110,0.f,20.f },
+	{1110,0.f,20.f },
+	{1160,0.f,20.f },
+	{1180,0.f,20.f },
+	{1120,0.f,20.f },
 	};
+
+	//SpawnData = sorted(SpawnData.)
+
+	SpawnData.sort([this](EnemySpawn* a, EnemySpawn* b)
+	{return a->spawn_frame < b->spawn_frame; });
 }
 
 void Spawn::Uninit()
@@ -56,10 +61,13 @@ void Spawn::Update()
 		//Manager::SetScene<Result>();
 	}
 
-	for (auto q : SpawnData) {
-		if (frame == q.spawn_frame) {
-			D3DXVECTOR3 pos = D3DXVECTOR3(q.x, -20.3f, q.y);
-			Manager::GetScene()->AddGameObject<Enemy>(1)->SetEnemy(pos, BWMode::black);
+	for (EnemySpawn* q : SpawnData) {
+		if (frame == q->spawn_frame) {
+			D3DXVECTOR3 pos = D3DXVECTOR3(q->x, -20.3f, q->y);
+			Manager::GetScene()->AddGameObject<Enemy>(1)->SetEnemy(pos, BWMode::eblack);
+		}
+		else {
+			break;
 		}
 	}
 }
