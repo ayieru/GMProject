@@ -43,7 +43,7 @@ void Explosion::Init()
 
 	//テクスチャ読み込み
 	D3DX11CreateShaderResourceViewFromFile(Renderer::GetDevice(),
-		"Asset/Texture/e.png",
+		"Asset/Texture/e.dds",
 		NULL,
 		NULL,
 		&Texture,

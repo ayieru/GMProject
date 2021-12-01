@@ -27,7 +27,7 @@ void Player::Init()
 	w_model = new Model();
 	w_model->Load("Asset\\Models\\p_white.obj");
 
-	BWMode mode = BWMode::black;
+	BWMode mode = BWMode::pblack;
 
 	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "vertexLightingVS.cso");
 
@@ -128,11 +128,11 @@ void Player::Update()
 			bgm->Load("Asset\\Audio\\02.wav");
 			//bgm->Play(false);
 
-			if (Mode == BWMode::black){
-				Mode = BWMode::white;
+			if (Mode == BWMode::pblack){
+				Mode = BWMode::pwhite;
 			}
 			else {
-				Mode = BWMode::black;
+				Mode = BWMode::pblack;
 			}
 		}
 		b = true;
@@ -186,7 +186,7 @@ void Player::Draw()
 	world = s * r * t;
 	Renderer::SetWorldMatrix(&world);
 
-	if (Mode == BWMode::black) {
+	if (Mode == BWMode::pblack) {
 		b_model->Draw();
 	}
 	else {

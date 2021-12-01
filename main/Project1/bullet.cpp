@@ -40,70 +40,74 @@ void Bullet::Update()
 {
 	Scene* scene = Manager::GetScene();
 
-	Position += Forward * speed;
 	if (Position.z > 28.0f || Position.z < -25.f || Position.x > 10.f || Position.x < -40.f) {
 		SetDestroy();
 	}
 
 	//エネミー当たり判定
-	std::vector<Enemy*> enemylist = scene->GetGameObjects<Enemy>(1);
-	for (Enemy* enemy : enemylist) {
+	if (Mode == BWMode::pblack || Mode == BWMode::pwhite) {
+		std::vector<Enemy*> enemylist = scene->GetGameObjects<Enemy>(1);
+		for (Enemy* enemy : enemylist) {
 
-		D3DXVECTOR3 enemyPosition = enemy->GetPosition();
-		D3DXVECTOR3 direction = Position - enemyPosition;
-		float length = D3DXVec3Length(&direction);
+			D3DXVECTOR3 enemyPosition = enemy->GetPosition();
+			D3DXVECTOR3 direction = Position - enemyPosition;
+			float length = D3DXVec3Length(&direction);
 
-		if (length < 1.0f) {
-			if (enemy->GetMode() != Mode) {
-				enemy->SetDestroy();
+			if (length < 1.0f) {
+				if (enemy->GetMode() != Mode) {
+					//enemy->SetDestroy();
+					SetDestroy();
+					scene->AddGameObject<Explosion>(1)->SetPosition(enemyPosition);
+				}
 				SetDestroy();
-				scene->AddGameObject<Explosion>(1)->SetPosition(enemyPosition);
 			}
-			SetDestroy();
 		}
 	}
 
 	//プレイヤー当たり判定
-	Player* player = scene->GetGameObject<Player>(1);
-	D3DXVECTOR3 pPosition = player->GetPosition();
-	D3DXVECTOR3 direction = Position - pPosition;
+	if (Mode == BWMode::eblack || Mode == BWMode::ewhite) {
+		Player* player = scene->GetGameObject<Player>(1);
+		D3DXVECTOR3 pPosition = player->GetPosition();
+		D3DXVECTOR3 direction = Position - pPosition;
 
-	D3DXVECTOR3 obbX, obbY, obbZ;
-	float obbLenX, obbLenY, obbLenZ;
+		D3DXVECTOR3 obbX, obbY, obbZ;
+		float obbLenX, obbLenY, obbLenZ;
 
-	obbX = player->GetOBBX();
-	obbLenX = D3DXVec3Length(&obbX);
-	obbX /= obbLenX;
+		obbX = player->GetOBBX();
+		obbLenX = D3DXVec3Length(&obbX);
+		obbX /= obbLenX;
 
-	obbY = player->GetOBBY();
-	obbLenY = D3DXVec3Length(&obbY);
-	obbY /= obbLenY;
+		obbY = player->GetOBBY();
+		obbLenY = D3DXVec3Length(&obbY);
+		obbY /= obbLenY;
 
-	obbZ = player->GetOBBZ();
-	obbLenZ = D3DXVec3Length(&obbZ);
-	obbZ /= obbLenZ;
+		obbZ = player->GetOBBZ();
+		obbLenZ = D3DXVec3Length(&obbZ);
+		obbZ /= obbLenZ;
 
-	float lenX, lenY,lenZ;
+		float lenX, lenY, lenZ;
 
-	lenX = D3DXVec3Dot(&obbX, &direction);
-	lenY = D3DXVec3Dot(&obbY, &direction);
-	lenZ = D3DXVec3Dot(&obbZ, &direction);
+		lenX = D3DXVec3Dot(&obbX, &direction);
+		lenY = D3DXVec3Dot(&obbY, &direction);
+		lenZ = D3DXVec3Dot(&obbZ, &direction);
 
+		if (fabs(lenX) < obbLenX && fabs(lenZ) < obbLenZ && fabs(lenY) < obbLenY) {
+			if (player->GetMode() != Mode) {
+				std::vector<Bullet*> bulletlist = scene->GetGameObjects<Bullet>(1);
 
-	if (fabs(lenX) < obbLenX && fabs(lenZ) < obbLenZ && fabs(lenY) < obbLenY) {
-		if (player->GetMode() != Mode) {
-			std::vector<Bullet*> bulletlist = scene->GetGameObjects<Bullet>(1);
+				//他のたまを消す
+				for (Bullet* bullet : bulletlist) {
+					//bullet->SetDestroy();
+				}
 
-			//他のたまを消す
-			for (Bullet* bullet : bulletlist) {
-				//bullet->SetDestroy();
+				SetDestroy();
+				scene->AddGameObject<Explosion>(1)->SetPosition(pPosition + D3DXVECTOR3(0.0f, 0.5f, 0.0f));
+				scene->GetGameObject<UI>(2)->UseLife();
 			}
-
-			SetDestroy();
-			scene->AddGameObject<Explosion>(1)->SetPosition(pPosition + D3DXVECTOR3(0.0f, 0.5f, 0.0f));
-			scene->GetGameObject<UI>(2)->UseLife();
 		}
 	}
+
+	Position += Forward * speed;
 }
 
 void Bullet::Draw()
@@ -122,7 +126,7 @@ void Bullet::Draw()
 	world = s * r * t;
 	Renderer::SetWorldMatrix(&world);
 
-	if (Mode == BWMode::black) {
+	if (Mode == BWMode::pblack || Mode == BWMode::eblack) {
 		BulletModel->Draw();
 	}
 	else {
