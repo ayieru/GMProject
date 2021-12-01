@@ -9,7 +9,7 @@
 
 void Spawn::Init()
 {
-	Data[] = {
+	SpawnData = {
 	{60,0.f,20.f },
 	{120,-20.f,20.f },
 	{320,0.f,20.f },
@@ -42,10 +42,8 @@ void Spawn::Init()
 	{1120,0.f,20.f },
 	};
 
-	//SpawnData = sorted(SpawnData.)
-
-	SpawnData.sort([this](EnemySpawn* a, EnemySpawn* b)
-	{return a->spawn_frame < b->spawn_frame; });
+	SpawnData.sort([this](EnemySpawn a, EnemySpawn b)
+	{return a.spawn_frame < b.spawn_frame; });
 }
 
 void Spawn::Uninit()
@@ -61,13 +59,10 @@ void Spawn::Update()
 		//Manager::SetScene<Result>();
 	}
 
-	for (EnemySpawn* q : SpawnData) {
-		if (frame == q->spawn_frame) {
-			D3DXVECTOR3 pos = D3DXVECTOR3(q->x, -20.3f, q->y);
+	for (EnemySpawn q : SpawnData) {
+		if (frame == q.spawn_frame) {
+			D3DXVECTOR3 pos = D3DXVECTOR3(q.x, -20.3f, q.y);
 			Manager::GetScene()->AddGameObject<Enemy>(1)->SetEnemy(pos, BWMode::eblack);
-		}
-		else {
-			break;
 		}
 	}
 }
