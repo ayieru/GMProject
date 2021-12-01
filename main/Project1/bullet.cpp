@@ -54,7 +54,8 @@ void Bullet::Update()
 			float length = D3DXVec3Length(&direction);
 
 			if (length < 1.0f) {
-				if (enemy->GetMode() != Mode) {
+				if ((enemy->GetMode() != BWMode::eblack && Mode != BWMode::pwhite) ||
+					(enemy->GetMode() != BWMode::ewhite && Mode != BWMode::pblack)) {
 					//enemy->SetDestroy();
 					SetDestroy();
 					scene->AddGameObject<Explosion>(1)->SetPosition(enemyPosition);
@@ -66,42 +67,21 @@ void Bullet::Update()
 
 	//ƒvƒŒƒCƒ„[“–‚½‚è”»’è
 	if (Mode == BWMode::eblack || Mode == BWMode::ewhite) {
+
 		Player* player = scene->GetGameObject<Player>(1);
-		D3DXVECTOR3 pPosition = player->GetPosition();
-		D3DXVECTOR3 direction = Position - pPosition;
 
-		D3DXVECTOR3 obbX, obbY, obbZ;
-		float obbLenX, obbLenY, obbLenZ;
+		if ((player->GetMode() != BWMode::pblack && Mode != BWMode::ewhite) ||
+			(player->GetMode() != BWMode::pwhite && Mode != BWMode::eblack)) {
 
-		obbX = player->GetOBBX();
-		obbLenX = D3DXVec3Length(&obbX);
-		obbX /= obbLenX;
-
-		obbY = player->GetOBBY();
-		obbLenY = D3DXVec3Length(&obbY);
-		obbY /= obbLenY;
-
-		obbZ = player->GetOBBZ();
-		obbLenZ = D3DXVec3Length(&obbZ);
-		obbZ /= obbLenZ;
-
-		float lenX, lenY, lenZ;
-
-		lenX = D3DXVec3Dot(&obbX, &direction);
-		lenY = D3DXVec3Dot(&obbY, &direction);
-		lenZ = D3DXVec3Dot(&obbZ, &direction);
-
-		if (fabs(lenX) < obbLenX && fabs(lenZ) < obbLenZ && fabs(lenY) < obbLenY) {
-			if (player->GetMode() != Mode) {
+			if (PlayerOBB()) {
 				std::vector<Bullet*> bulletlist = scene->GetGameObjects<Bullet>(1);
 
 				//‘¼‚Ì‚½‚Ü‚ðÁ‚·
 				for (Bullet* bullet : bulletlist) {
-					//bullet->SetDestroy();
+					bullet->SetDestroy();
 				}
-
 				SetDestroy();
-				scene->AddGameObject<Explosion>(1)->SetPosition(pPosition + D3DXVECTOR3(0.0f, 0.5f, 0.0f));
+				scene->AddGameObject<Explosion>(1)->SetPosition(player->GetPosition() + D3DXVECTOR3(0.0f, 0.5f, 0.0f));
 				scene->GetGameObject<UI>(2)->UseLife();
 			}
 		}
@@ -133,6 +113,43 @@ void Bullet::Draw()
 		_BulletModel->Draw();
 	}
 
+}
+
+bool Bullet::PlayerOBB()
+{
+	Scene* scene = Manager::GetScene();
+	Player* player = scene->GetGameObject<Player>(1);
+
+	D3DXVECTOR3 pPosition = player->GetPosition();
+	D3DXVECTOR3 direction = Position - pPosition;
+
+	D3DXVECTOR3 obbX, obbY, obbZ;
+	float obbLenX, obbLenY, obbLenZ;
+
+	obbX = player->GetOBBX();
+	obbLenX = D3DXVec3Length(&obbX);
+	obbX /= obbLenX;
+
+	obbY = player->GetOBBY();
+	obbLenY = D3DXVec3Length(&obbY);
+	obbY /= obbLenY;
+
+	obbZ = player->GetOBBZ();
+	obbLenZ = D3DXVec3Length(&obbZ);
+	obbZ /= obbLenZ;
+
+	float lenX, lenY, lenZ;
+
+	lenX = D3DXVec3Dot(&obbX, &direction);
+	lenY = D3DXVec3Dot(&obbY, &direction);
+	lenZ = D3DXVec3Dot(&obbZ, &direction);
+
+	if (fabs(lenX) < obbLenX && fabs(lenZ) < obbLenZ && fabs(lenY) < obbLenY) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 void Bullet::Load()

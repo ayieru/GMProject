@@ -34,7 +34,9 @@ public:
     //Get関数
     BWMode GetMode() { return Mode; }
     D3DXVECTOR3 GetPosition() { return Position; }
-    D3DXVECTOR3 GetForward() //前方向ベクトル
+
+    //前方向ベクトル
+    D3DXVECTOR3 GetForward() 
     {
         D3DXMATRIX r;
         D3DXMatrixRotationYawPitchRoll(&r, Rotation.y, Rotation.x, Rotation.z);
@@ -47,6 +49,7 @@ public:
         return forward;
     }
 
+    //OBBの生成
     D3DXVECTOR3 GetOBBX()
     {
         D3DXMATRIX world, scale, rot, trans;
@@ -69,7 +72,6 @@ public:
 
         return vx * 0.5f;
     }
-
     D3DXVECTOR3 GetOBBY()
     {
         D3DXMATRIX world, scale, rot, trans;
@@ -92,7 +94,6 @@ public:
 
         return vy * 0.5f;
     }
-
     D3DXVECTOR3 GetOBBZ()
     {
         D3DXMATRIX world, scale, rot, trans;
