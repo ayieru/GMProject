@@ -18,8 +18,7 @@ private:
 	int max = 31;
 	int frame;
 
-	EnemySpawn Data[];
-	std::list<EnemySpawn*> SpawnData;
+	std::list<EnemySpawn> SpawnData{};
 
 public:
 	void Init();
