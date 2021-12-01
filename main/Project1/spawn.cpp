@@ -10,36 +10,36 @@
 void Spawn::Init()
 {
 	SpawnData = {
-	{60,0.f,20.f },
-	{120,-20.f,20.f },
-	{320,0.f,20.f },
-	{320,-20.f,20.f },
-	{320,0.f,20.f },
-	{320,0.f,20.f },
-	{700,0.f,20.f },
-	{720,0.f,20.f },
-	{740,0.f,20.f },
-	{760,0.f,20.f },
-	{1000,0.f,20.f },
-	{1000,0.f,20.f },
-	{1070,0.f,20.f },
-	{1070,0.f,20.f },
-	{1070,0.f,20.f },
-	{1100,0.f,20.f },
-	{1100,0.f,20.f },
-	{1100,0.f,20.f },
-	{1100,-40.f,20.f },
-	{1100,0.f,20.f },
-	{1100,0.f,20.f },
-	{1120,0.f,20.f },
-	{1140,0.f,20.f },
-	{1160,0.f,20.f },
-	{1180,0.f,20.f },
-	{1110,0.f,20.f },
-	{1110,0.f,20.f },
-	{1160,0.f,20.f },
-	{1180,0.f,20.f },
-	{1120,0.f,20.f },
+	{60,0.f,20.f,BWMode::eblack},
+	{120,-20.f,20.f ,BWMode::eblack},
+	{320,0.f,20.f ,BWMode::eblack},
+	{320,-20.f,20.f ,BWMode::ewhite},
+	{320,0.f,20.f ,BWMode::ewhite},
+	{320,0.f,20.f ,BWMode::eblack},
+	{700,0.f,20.f ,BWMode::eblack},
+	{720,0.f,20.f ,BWMode::eblack},
+	{740,0.f,20.f ,BWMode::ewhite},
+	{760,0.f,20.f ,BWMode::eblack},
+	{1000,0.f,20.f ,BWMode::eblack},
+	{1000,0.f,20.f ,BWMode::eblack},
+	{1070,0.f,20.f ,BWMode::eblack},
+	{1070,0.f,20.f ,BWMode::eblack},
+	{1070,0.f,20.f ,BWMode::eblack},
+	{1100,0.f,20.f ,BWMode::eblack},
+	{1100,0.f,20.f ,BWMode::eblack},
+	{1100,0.f,20.f ,BWMode::eblack},
+	{1100,-40.f,20.f ,BWMode::eblack},
+	{1100,0.f,20.f ,BWMode::eblack},
+	{1100,0.f,20.f ,BWMode::eblack},
+	{1120,0.f,20.f ,BWMode::eblack},
+	{1140,0.f,20.f ,BWMode::eblack},
+	{1160,0.f,20.f ,BWMode::eblack},
+	{1180,0.f,20.f ,BWMode::eblack},
+	{1110,0.f,20.f ,BWMode::eblack},
+	{1110,0.f,20.f ,BWMode::eblack},
+	{1160,0.f,20.f ,BWMode::eblack},
+	{1180,0.f,20.f ,BWMode::eblack},
+	{1120,0.f,20.f ,BWMode::eblack},
 	};
 
 	SpawnData.sort([this](EnemySpawn a, EnemySpawn b)
@@ -62,11 +62,9 @@ void Spawn::Update()
 	for (EnemySpawn q : SpawnData) {
 		if (frame == q.spawn_frame) {
 			D3DXVECTOR3 pos = D3DXVECTOR3(q.x, -20.3f, q.y);
-			Manager::GetScene()->AddGameObject<Enemy>(1)->SetEnemy(pos, BWMode::eblack);
+			Manager::GetScene()->AddGameObject<Enemy>(1)->SetEnemy(pos, q.mode);
 		}
 	}
 }
 
-void Spawn::Draw()
-{
-}
+void Spawn::Draw(){}

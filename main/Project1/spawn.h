@@ -6,9 +6,8 @@
 struct EnemySpawn
 {
 	int spawn_frame;
-	float x;
-	float y;
-
+	float x,y;
+	BWMode mode;
 };
 
 class Spawn :public GameObject

@@ -76,11 +76,11 @@ void Player::Update()
 	//shot
 	if (GetAsyncKeyState(VK_K)) {
 		if (a == 0) {
-			Audio* bgm = Manager::GetScene()->AddGameObject<Audio>(2);
-			bgm->Load("Asset\\Audio\\02.wav");
-			//bgm->Play(false);
+			Audio* se = Manager::GetScene()->AddGameObject<Audio>(2);
+			se->Load("Asset\\Audio\\02.wav");
+			//se->Play(false);
 			Manager::GetScene()->AddGameObject<Bullet>(1)->
-				SetBullet(Position + D3DXVECTOR3(0.f, 1.f, 0.f),forward,Mode);
+				SetBullet(Position + D3DXVECTOR3(0.f, 1.f, 0.f), forward, Mode);
 		}
 		a++;
 
