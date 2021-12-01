@@ -19,6 +19,8 @@ private:
     int a = 0;
     float x = 0.0f;
 
+    EnemyType type;
+
 public:
     void Init();
     void Uninit();

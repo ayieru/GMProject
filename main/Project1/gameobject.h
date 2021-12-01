@@ -8,6 +8,14 @@ enum class BWMode {
     ewhite,
 };
 
+enum class EnemyType {
+    A,
+    B,
+    C,
+    D,
+    E
+};
+
 class GameObject
 {
 protected:

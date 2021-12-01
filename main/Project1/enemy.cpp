@@ -22,6 +22,7 @@ void Enemy::Init()
 	Rotation = D3DXVECTOR3(0.0f, 1.0f, 1.0f);
 	Scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 	Mode = BWMode::pblack;
+	type = EnemyType::A;
 
 	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "vertexLightingVS.cso");
 
@@ -39,21 +40,20 @@ void Enemy::Update()
 {
 	std::random_device rnd;
 	std::mt19937 mt(rnd());
-	std::uniform_int_distribution<> r(1,10);
-
+	std::uniform_int_distribution<> r(1,100);
 	Rotation.y += r(mt) * 0.01f;
 
-	if (a != 0) {
+	if (a == 0) {
 		Manager::GetScene()->AddGameObject<Bullet>(1)->
 			SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), GetForward(),Mode);
 	}
 	a++;
 
-	if (a > 10) {
+	if (a > 50) {
 		a = 0;
 	}
 
-	Position.z -= 0.1f;
+	Position.z -= 0.01f;
 }
 
 void Enemy::Draw()
