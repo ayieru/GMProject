@@ -32,14 +32,14 @@ void Spawn::Init()
 	{1100,0.f,20.f ,BWMode::eblack},
 	{1100,0.f,20.f ,BWMode::eblack},
 	{1120,0.f,20.f ,BWMode::eblack},
-	{1140,0.f,20.f ,BWMode::eblack},
-	{1160,0.f,20.f ,BWMode::eblack},
-	{1180,0.f,20.f ,BWMode::eblack},
-	{1110,0.f,20.f ,BWMode::eblack},
-	{1110,0.f,20.f ,BWMode::eblack},
-	{1160,0.f,20.f ,BWMode::eblack},
-	{1180,0.f,20.f ,BWMode::eblack},
-	{1120,0.f,20.f ,BWMode::eblack},
+	{1210,0.f,20.f ,BWMode::eblack},
+	{1210,0.f,20.f ,BWMode::eblack},
+	{1210,0.f,20.f ,BWMode::eblack},
+	{1210,0.f,20.f ,BWMode::eblack},
+	{1210,0.f,20.f ,BWMode::eblack},
+	{1210,0.f,20.f ,BWMode::eblack},
+	{1210,0.f,20.f ,BWMode::eblack},
+	{1210,0.f,20.f ,BWMode::eblack},
 	};
 
 	SpawnData.sort([this](EnemySpawn a, EnemySpawn b)
@@ -59,7 +59,7 @@ void Spawn::Update()
 		//Manager::SetScene<Result>();
 	}
 
-	for (EnemySpawn q : SpawnData) {
+	for (EnemySpawn &q : SpawnData) {
 		if (frame == q.spawn_frame) {
 			D3DXVECTOR3 pos = D3DXVECTOR3(q.x, -20.3f, q.y);
 			Manager::GetScene()->AddGameObject<Enemy>(1)->SetEnemy(pos, q.mode);

@@ -46,6 +46,7 @@ void Bullet::Update()
 
 	//エネミー当たり判定
 	if (Mode == BWMode::pblack || Mode == BWMode::pwhite) {
+
 		std::vector<Enemy*> enemylist = scene->GetGameObjects<Enemy>(1);
 		for (Enemy* enemy : enemylist) {
 
@@ -56,7 +57,7 @@ void Bullet::Update()
 			if (length < 1.0f) {
 				if ((enemy->GetMode() != BWMode::eblack && Mode != BWMode::pwhite) ||
 					(enemy->GetMode() != BWMode::ewhite && Mode != BWMode::pblack)) {
-					//enemy->SetDestroy();
+					enemy->SetDestroy();
 					SetDestroy();
 					scene->AddGameObject<Explosion>(1)->SetPosition(enemyPosition);
 				}
