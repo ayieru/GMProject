@@ -16,6 +16,8 @@
 Model* Enemy::EnemyModel;
 Model* Enemy::_EnemyModel;
 
+EnemyStruct* Enemy::enemy[2];
+
 void Enemy::Init()
 {
 	Position = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
@@ -82,6 +84,10 @@ void Enemy::Draw()
 
 void Enemy::Load()
 {
+	for (Model* q : enemy) {
+
+	}
+
 	EnemyModel = new Model();
 	EnemyModel->Load("Asset\\Models\\e_black.obj");
 

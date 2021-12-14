@@ -30,7 +30,6 @@ void Player::Init()
 	BWMode mode = BWMode::pblack;
 
 	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "vertexLightingVS.cso");
-
 	Renderer::CreatePixelShader(&PixelShader, "vertexLightingPS.cso");
 
 	Position = D3DXVECTOR3(-16.0f, -21.3f, -16.0f);
@@ -166,7 +165,6 @@ void Player::Update()
 		D3DXQuaternionRotationAxis(&quat, &axis, 0.1f);
 		Quaternion *= quat;
 	}
-
 
 }
 

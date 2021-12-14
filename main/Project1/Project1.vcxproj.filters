@@ -77,6 +77,9 @@
     <ClCompile Include="spawn.cpp">
       <Filter>cpp</Filter>
     </ClCompile>
+    <ClCompile Include="boss.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="manager.h">
@@ -154,6 +157,9 @@
     <ClInclude Include="time.h">
       <Filter>h</Filter>
     </ClInclude>
+    <ClInclude Include="boss.h">
+      <Filter>h</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="common.hlsl">
@@ -169,6 +175,18 @@
       <Filter>hlsl</Filter>
     </FxCompile>
     <FxCompile Include="vertexLightingVS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="C:\Users\reyay\source\repos\GG31\Shader\Shader\toonVS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="C:\Users\reyay\source\repos\GG31\Shader\Shader\toonPS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="C:\Users\reyay\source\repos\GG31\Shader\Shader\pixelLightingRimVS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="C:\Users\reyay\source\repos\GG31\Shader\Shader\pixelLightingRimPS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
   </ItemGroup>
