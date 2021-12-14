@@ -4,6 +4,8 @@
 #include "field.h"
 #include "camera.h"
 #include "game.h"
+#include "Toul.h"
+#include <iostream>
 
 void Field::Init()
 {
@@ -72,7 +74,6 @@ void Field::Uninit()
 
 void Field::Update()
 {
-	flame++;
 }
 
 void Field::Draw()

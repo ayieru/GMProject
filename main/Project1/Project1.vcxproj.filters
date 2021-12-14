@@ -177,5 +177,17 @@
     <FxCompile Include="vertexLightingVS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
+    <FxCompile Include="C:\Users\reyay\source\repos\GG31\Shader\Shader\toonVS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="C:\Users\reyay\source\repos\GG31\Shader\Shader\toonPS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="C:\Users\reyay\source\repos\GG31\Shader\Shader\pixelLightingRimVS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="C:\Users\reyay\source\repos\GG31\Shader\Shader\pixelLightingRimPS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

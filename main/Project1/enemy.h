@@ -2,11 +2,25 @@
 
 #include "gameobject.h"
 
+#include  <list>
+
 class Model;
+
+enum class EnemyState {
+    A,
+    B,
+    C,
+    D,
+    E,
+    Boss1,
+    Boss2,
+    Boss3
+};
 
 class Enemy : public GameObject
 {
 private:
+    std::list<Model*> enemy;
 
     static Model* EnemyModel;
     static Model* _EnemyModel;
