@@ -2,4 +2,5 @@
   game.cpp
   コードを生成中...
   boss.cpp
+  LINK : 前回のインクリメンタル リンクで F:\GMProject\main\Debug\Project1.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
   Project1.vcxproj -> F:\GMProject\main\Debug\Project1.exe
