@@ -119,6 +119,8 @@ public:
 
     //Setä÷êî
     void SetPosition(D3DXVECTOR3 sPosition) { Position = sPosition; }
+    void SetRotation(D3DXVECTOR3 sRotation) { Rotation = sRotation; }
+    void SetScale(D3DXVECTOR3 sScale) { Scale = sScale; }
     void SetEnemy(D3DXVECTOR3 sPosition, BWMode sMode) { Position = sPosition, Mode = sMode; }
     void SetForward(D3DXVECTOR3 sPosition, D3DXVECTOR3 sForward) { Position = sPosition, Forward = sForward; }
     void SetBullet(D3DXVECTOR3 sPosition, D3DXVECTOR3 sForward, BWMode sMode) { Position = sPosition, Forward = sForward, Mode = sMode; }

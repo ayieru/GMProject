@@ -21,7 +21,7 @@ void BossEnemy::Init()
 	Mode = BWMode::eblack;
 
 	for (int i = 0; i < 2; i++) {
-		en[i] = Manager::GetScene()->AddGameObject<Enemy>(1);
+		en[i] = new Enemy();
 	}
 
 	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "vertexLightingVS.cso");
@@ -80,6 +80,8 @@ void BossEnemy::Update()
 	}
 
 	en[1]->SetPosition(Position + D3DXVECTOR3(fcos, 0.f, fsin));
+	en[1]->SetRotation(Rotation);
+	en[1]->SetScale(Scale);
 }
 
 void BossEnemy::Draw()
