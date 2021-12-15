@@ -70,6 +70,10 @@ void BossEnemy::Update()
 	}
 
 	Rotation.y += 0.02f;
+
+	if (life <= 0) {
+		SetDestroy();
+	}
 }
 
 void BossEnemy::Draw()

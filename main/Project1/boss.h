@@ -21,6 +21,7 @@ private:
     float fsin = 0.f;
     float fcos = 0.f;
     int a = 0;
+    int life = 20;
     bool re = false;
 
 public:
@@ -28,6 +29,8 @@ public:
     void Uninit();
     void Update();
     void Draw();
+
+    void UseLife() { life--; };
 
     static void Load();
     static void UnLoad();
