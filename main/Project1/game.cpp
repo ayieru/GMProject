@@ -32,7 +32,7 @@ void Game::Init()
 	AddGameObject<Camera>(0);
 	AddGameObject<UI>(2);
 	AddGameObject<Field>(1);
-	AddGameObject<Spawn>(1);
+	//AddGameObject<Spawn>(1);
 	AddGameObject<Player>(1);
 	AddGameObject<BossEnemy>(1);
 

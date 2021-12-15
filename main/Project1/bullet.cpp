@@ -179,22 +179,25 @@ bool Bullet::BossOBB()
 {
 	Scene* scene = Manager::GetScene();
 	BossEnemy* enemy = scene->GetGameObject<BossEnemy>(1);
+	Enemy* benemy = enemy->GetEn(1);
 
-	D3DXVECTOR3 pPosition = enemy->GetPosition();
+	D3DXVECTOR3 pPosition = benemy->GetPosition();
 	D3DXVECTOR3 direction = Position - pPosition;
+	float length = D3DXVec3Length(&direction);
+	if (length > 2.0f) return false;
 
 	D3DXVECTOR3 obbX, obbY, obbZ;
 	float obbLenX, obbLenY, obbLenZ;
 
-	obbX = enemy->GetOBBX();
+	obbX = benemy->GetOBBX();
 	obbLenX = D3DXVec3Length(&obbX);
 	obbX /= obbLenX;
 
-	obbY = enemy->GetOBBY();
+	obbY = benemy->GetOBBY();
 	obbLenY = D3DXVec3Length(&obbY);
 	obbY /= obbLenY;
 
-	obbZ = enemy->GetOBBZ();
+	obbZ = benemy->GetOBBZ();
 	obbLenZ = D3DXVec3Length(&obbZ);
 	obbZ /= obbLenZ;
 

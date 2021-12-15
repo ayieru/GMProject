@@ -9,8 +9,6 @@ class BossEnemy : public Enemy
 {
 private:
 
-    static Model* BossModel[];
-
     static Enemy* en[];
 
     ID3D11VertexShader* VertexShader = NULL;
@@ -30,7 +28,9 @@ public:
     void Update();
     void Draw();
 
-    void UseLife() { life--; };
+    Enemy* GetEn(int num) const { return en[num]; }
+
+    void UseLife() { life--; }
 
     static void Load();
     static void UnLoad();

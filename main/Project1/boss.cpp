@@ -11,7 +11,7 @@
 #include <iostream>
 #include <random>
 
-Model* BossEnemy::BossModel[5];
+Enemy* BossEnemy::en[5];
 
 void BossEnemy::Init()
 {
@@ -19,6 +19,10 @@ void BossEnemy::Init()
 	Rotation = D3DXVECTOR3(0.0f, 1.0f, 1.0f);
 	Scale = D3DXVECTOR3(2.0f, 2.0f, 2.0f);
 	Mode = BWMode::eblack;
+
+	for (int i = 0; i < 2; i++) {
+		en[i] = Manager::GetScene()->AddGameObject<Enemy>(1);
+	}
 
 	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "vertexLightingVS.cso");
 	Renderer::CreatePixelShader(&PixelShader, "vertexLightingPS.cso");
@@ -74,6 +78,8 @@ void BossEnemy::Update()
 	if (life <= 0) {
 		SetDestroy();
 	}
+
+	en[1]->SetPosition(Position + D3DXVECTOR3(fcos, 0.f, fsin));
 }
 
 void BossEnemy::Draw()
@@ -91,27 +97,13 @@ void BossEnemy::Draw()
 	D3DXMatrixTranslation(&t, Position.x, Position.y, Position.z);
 	world = s * r * t;
 	Renderer::SetWorldMatrix(&world);
-	BossModel[0]->Draw();
+	en[0]->EnemyModel->Draw();
 
-	D3DXMatrixTranslation(&t, Position.x + fcos, Position.y, Position.z + fsin);
+	D3DXVECTOR3 p = en[1]->GetPosition();
+	D3DXMatrixTranslation(&t, p.x, p.y, p.z);
 	world = s * r * t;
 	Renderer::SetWorldMatrix(&world);
-	BossModel[1]->Draw();
-
-	D3DXMatrixTranslation(&t, Position.x - fcos, Position.y, Position.z + fsin);
-	world = s * r * t;
-	Renderer::SetWorldMatrix(&world);
-	BossModel[2]->Draw();
-
-	D3DXMatrixTranslation(&t, Position.x + fcos, Position.y, Position.z - fsin);
-	world = s * r * t;
-	Renderer::SetWorldMatrix(&world);
-	BossModel[3]->Draw();
-
-	D3DXMatrixTranslation(&t, Position.x - fcos, Position.y, Position.z - fsin);
-	world = s * r * t;
-	Renderer::SetWorldMatrix(&world);
-	BossModel[4]->Draw();
+	en[1]->EnemyModel->Draw();
 
 }
 
@@ -121,20 +113,20 @@ void BossEnemy::Load()
 
 	for (int j = 0; j < 5; j++) {
 		if (i == 0) {
-			BossModel[j] = new Model();
-			BossModel[j]->Load("Asset\\Models\\e_black.obj");
+			en[j]->EnemyModel = new Model();
+			en[j]->EnemyModel->Load("Asset\\Models\\e_black.obj");
 			i++;
 		}
 		else {
-			BossModel[j] = new Model();
-			BossModel[j]->Load("Asset\\Models\\e_white.obj");
+			en[j]->EnemyModel = new Model();
+			en[j]->EnemyModel->Load("Asset\\Models\\e_white.obj");
 		}
 	}
 }
 
 void BossEnemy::UnLoad()
 {
-	for (int i = 0; i < 5; i++) {
-		BossModel[i]->Unload();
-	}
+	//for (int i = 0; i < 5; i++) {
+	//	en[i]->EnemyModel->Unload();
+	//}
 }
