@@ -16,17 +16,13 @@
 Model* Enemy::EnemyModel;
 Model* Enemy::_EnemyModel;
 
-EnemyStruct* Enemy::enemy[2];
-
 void Enemy::Init()
 {
 	Position = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	Rotation = D3DXVECTOR3(0.0f, 1.0f, 1.0f);
 	Scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
-	Mode = BWMode::pblack;
 
 	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "vertexLightingVS.cso");
-
 	Renderer::CreatePixelShader(&PixelShader, "vertexLightingPS.cso");
 }
 
@@ -84,10 +80,6 @@ void Enemy::Draw()
 
 void Enemy::Load()
 {
-	for (Model* q : enemy) {
-
-	}
-
 	EnemyModel = new Model();
 	EnemyModel->Load("Asset\\Models\\e_black.obj");
 

@@ -8,6 +8,7 @@
 #include "player.h"
 #include "explosion.h"
 #include "UI.h"
+#include "boss.h"
 #include <string>
 #include <iostream>
 
@@ -88,6 +89,26 @@ void Bullet::Update()
 		}
 	}
 
+	//ボス当たり判定
+	if (Mode == BWMode::pblack || Mode == BWMode::pwhite) {
+
+		BossEnemy* boss = scene->GetGameObject<BossEnemy>(1);
+
+		if ((boss->GetMode() != BWMode::pblack && Mode != BWMode::ewhite) ||
+			(boss->GetMode() != BWMode::pwhite && Mode != BWMode::eblack)) {
+
+			if (BossOBB()) {
+				std::vector<Bullet*> bulletlist = scene->GetGameObjects<Bullet>(1);
+
+				SetDestroy();
+				scene->AddGameObject<Explosion>(1)->SetPosition(boss->GetPosition() + D3DXVECTOR3(0.0f, 0.5f, 0.0f));
+
+				//UI、ステータスの変更を追加
+				//scene->GetGameObject<UI>(2)->UseLife();
+			}
+		}
+	}
+
 	Position += Forward * speed;
 }
 
@@ -136,6 +157,43 @@ bool Bullet::PlayerOBB()
 	obbY /= obbLenY;
 
 	obbZ = player->GetOBBZ();
+	obbLenZ = D3DXVec3Length(&obbZ);
+	obbZ /= obbLenZ;
+
+	float lenX, lenY, lenZ;
+
+	lenX = D3DXVec3Dot(&obbX, &direction);
+	lenY = D3DXVec3Dot(&obbY, &direction);
+	lenZ = D3DXVec3Dot(&obbZ, &direction);
+
+	if (fabs(lenX) < obbLenX && fabs(lenZ) < obbLenZ && fabs(lenY) < obbLenY) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+bool Bullet::BossOBB()
+{
+	Scene* scene = Manager::GetScene();
+	BossEnemy* enemy = scene->GetGameObject<BossEnemy>(1);
+
+	D3DXVECTOR3 pPosition = enemy->GetPosition();
+	D3DXVECTOR3 direction = Position - pPosition;
+
+	D3DXVECTOR3 obbX, obbY, obbZ;
+	float obbLenX, obbLenY, obbLenZ;
+
+	obbX = enemy->GetOBBX();
+	obbLenX = D3DXVec3Length(&obbX);
+	obbX /= obbLenX;
+
+	obbY = enemy->GetOBBY();
+	obbLenY = D3DXVec3Length(&obbY);
+	obbY /= obbLenY;
+
+	obbZ = enemy->GetOBBZ();
 	obbLenZ = D3DXVec3Length(&obbZ);
 	obbZ /= obbLenZ;
 

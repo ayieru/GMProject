@@ -5,13 +5,12 @@
 enum class EnemyState {
 	A,
 	B,
-	C
+	C,
 	D,
 	E,
 	Boss1,
-	Boss2
+	Boss2,
 	Boss3,
-
 };
 
 struct EnemySpawn

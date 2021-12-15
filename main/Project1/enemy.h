@@ -6,24 +6,10 @@
 
 class Model;
 
-enum class EnemyState {
-    A,
-    B,
-    C,
-    D,
-    E,
-    Boss1,
-    Boss2,
-    Boss3
-};
-
 class Enemy : public GameObject
 {
 private:
-    std::list<Model*> enemy;
-
-    static Model* EnemyModel;
-    static Model* _EnemyModel;
+    //std::list<Model*> static enemy;
 
     ID3D11VertexShader* VertexShader = NULL;
     ID3D11PixelShader* PixelShader = NULL;
@@ -34,6 +20,10 @@ private:
     float x = 0.0f;
 
 public:
+
+    static Model* EnemyModel;
+    static Model* _EnemyModel;
+
     void Init();
     void Uninit();
     void Update();
