@@ -4,15 +4,21 @@
 
 #include "model.h"
 #include "boss.h"
+#include "bullet.h"
+#include "game.h"
 
+#include <string>
+#include <iostream>
+#include <random>
 
+Model* BossEnemy::BossModel[5];
 
 void BossEnemy::Init()
 {
-	Position = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	Position = D3DXVECTOR3(-14.0f, -20.3f, 15.0f);
 	Rotation = D3DXVECTOR3(0.0f, 1.0f, 1.0f);
-	Scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
-	Mode = BWMode::pblack;
+	Scale = D3DXVECTOR3(2.0f, 2.0f, 2.0f);
+	Mode = BWMode::eblack;
 
 	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "vertexLightingVS.cso");
 	Renderer::CreatePixelShader(&PixelShader, "vertexLightingPS.cso");
@@ -27,6 +33,43 @@ void BossEnemy::Uninit()
 
 void BossEnemy::Update()
 {
+	std::random_device rnd;
+	std::mt19937 mt(rnd());
+	std::uniform_int_distribution<> r(1, 10);
+
+	rot += 0.05f;
+
+	fsin = 4 * sinf(rot);
+	fcos = 4 * cosf(rot);
+
+	if (Position.x >= 0.f) {
+		re = true;
+	}
+	else if(!re){
+		Position.x += 0.1f;
+	}
+
+	if (Position.x <= -25.f) {
+		re = false;
+	}
+	else if(re) {
+		Position.x -= 0.1f;
+	}
+
+	if (a == 0) {
+		Manager::GetScene()->AddGameObject<Bullet>(1)->
+			SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, -1.0f), Mode);
+		Manager::GetScene()->AddGameObject<Bullet>(1)->
+			SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.2f, 0.0f, -1.0f), Mode);
+		Manager::GetScene()->AddGameObject<Bullet>(1)->
+			SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-0.2f, 0.0f, -1.0f), Mode);
+	}
+	a++;
+	if (a > 10) {
+		a = 0;
+	}
+
+	Rotation.y += 0.02f;
 }
 
 void BossEnemy::Draw()
@@ -44,32 +87,50 @@ void BossEnemy::Draw()
 	D3DXMatrixTranslation(&t, Position.x, Position.y, Position.z);
 	world = s * r * t;
 	Renderer::SetWorldMatrix(&world);
+	BossModel[0]->Draw();
 
-	for (Model* q : BossModel) {
-		if (q != nullptr) {
-			q->Draw();
-		}
-	}
+	D3DXMatrixTranslation(&t, Position.x + fcos, Position.y, Position.z + fsin);
+	world = s * r * t;
+	Renderer::SetWorldMatrix(&world);
+	BossModel[1]->Draw();
+
+	D3DXMatrixTranslation(&t, Position.x - fcos, Position.y, Position.z + fsin);
+	world = s * r * t;
+	Renderer::SetWorldMatrix(&world);
+	BossModel[2]->Draw();
+
+	D3DXMatrixTranslation(&t, Position.x + fcos, Position.y, Position.z - fsin);
+	world = s * r * t;
+	Renderer::SetWorldMatrix(&world);
+	BossModel[3]->Draw();
+
+	D3DXMatrixTranslation(&t, Position.x - fcos, Position.y, Position.z - fsin);
+	world = s * r * t;
+	Renderer::SetWorldMatrix(&world);
+	BossModel[4]->Draw();
+
 }
 
 void BossEnemy::Load()
 {
 	int i = 0;
 
-	for (Model* q : BossModel) {
+	for (int j = 0; j < 5; j++) {
 		if (i == 0) {
-			q->Load("Asset\\Models\\e_black.obj");
+			BossModel[j] = new Model();
+			BossModel[j]->Load("Asset\\Models\\e_black.obj");
 			i++;
 		}
 		else {
-			q->Load("Asset\\Models\\e_white.obj");
+			BossModel[j] = new Model();
+			BossModel[j]->Load("Asset\\Models\\e_white.obj");
 		}
 	}
 }
 
 void BossEnemy::UnLoad()
 {
-	for (Model* q : BossModel) {
-		q->Unload();
+	for (int i = 0; i < 5; i++) {
+		BossModel[i]->Unload();
 	}
 }

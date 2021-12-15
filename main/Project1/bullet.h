@@ -16,6 +16,7 @@ private:
     float speed = 0.f;
 
     bool PlayerOBB();
+    bool BossOBB();
 
 public:
     void Init();

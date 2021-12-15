@@ -27,16 +27,14 @@ void Game::Init()
 {
 	Enemy::Load();
 	Bullet::Load();
+	BossEnemy::Load();
 
 	AddGameObject<Camera>(0);
 	AddGameObject<UI>(2);
 	AddGameObject<Field>(1);
 	AddGameObject<Spawn>(1);
-	AddGameObject<Enemy>(1)->SetEnemy(D3DXVECTOR3(0.0f, -20.3f, 5.0f),BWMode::eblack);
-	AddGameObject<Enemy>(1)->SetEnemy(D3DXVECTOR3(-15.0f, -20.3f, 10.0f), BWMode::ewhite);
-	AddGameObject<Enemy>(1)->SetEnemy(D3DXVECTOR3(-3.0f, -20.3f, -2.0f),BWMode::eblack);
 	AddGameObject<Player>(1);
-	AddGameObject<BossEnemy>(1)->SetEnemy(D3DXVECTOR3(-10.0f, -20.3f, 5.0f), BWMode::eblack);
+	AddGameObject<BossEnemy>(1);
 
 	//Audio* bgm = AddGameObject<Audio>(2);
 	//bgm->Load("");
@@ -53,6 +51,7 @@ void Game::Uninit()
 
 	Enemy::UnLoad();
 	Bullet::UnLoad();
+	BossEnemy::UnLoad();
 }
 
 void Game::Update()
