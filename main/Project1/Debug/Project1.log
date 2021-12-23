@@ -1,5 +1,23 @@
-﻿  bullet.cpp
+﻿  UI.cpp
+  UI_life.cpp
+  UI_sp.cpp
+  audio.cpp
+  bullet.cpp
+  camera.cpp
+  enemy.cpp
+  explosion.cpp
+  field.cpp
   game.cpp
+  manager.cpp
+  player.cpp
+  polygon2D.cpp
+  result.cpp
+F:\GMProject\main\Project1\result.cpp(13,13): warning C4101: 'title': ローカル変数は 1 度も使われていません。
+  skydoom.cpp
+  spawn.cpp
+  title.cpp
+F:\GMProject\main\Project1\title.cpp(13,13): warning C4101: 'title': ローカル変数は 1 度も使われていません。
+  white.cpp
   コードを生成中...
   boss.cpp
   LINK : 前回のインクリメンタル リンクで F:\GMProject\main\Debug\Project1.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
