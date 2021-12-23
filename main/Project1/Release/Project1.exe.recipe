@@ -2,21 +2,33 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\reyay\source\repos\GM31\GM31_now\Release\Project1.exe</FullPath>
+      <FullPath>F:\GMProject\main\Release\Project1.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles>
     <ContentFile>
-      <FullPath>C:\Users\reyay\source\repos\GM31\GM31_now\Project1\unlitTexturePS.cso</FullPath>
+      <FullPath>F:\GMProject\main\Project1\pixelLightingRimPS.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\reyay\source\repos\GM31\GM31_now\Project1\unlitTextureVS.cso</FullPath>
+      <FullPath>F:\GMProject\main\Project1\pixelLightingRimVS.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\reyay\source\repos\GM31\GM31_now\Project1\vertexLightingPS.cso</FullPath>
+      <FullPath>F:\GMProject\main\Project1\toonPS.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\reyay\source\repos\GM31\GM31_now\Project1\vertexLightingVS.cso</FullPath>
+      <FullPath>F:\GMProject\main\Project1\toonVS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\GMProject\main\Project1\unlitTexturePS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\GMProject\main\Project1\unlitTextureVS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\GMProject\main\Project1\vertexLightingPS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\GMProject\main\Project1\vertexLightingVS.cso</FullPath>
     </ContentFile>
   </ContentFiles>
   <SatelliteDlls />
