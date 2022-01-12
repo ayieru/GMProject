@@ -93,6 +93,7 @@ void Bullet::Update()
 	if (Mode == BWMode::pblack || Mode == BWMode::pwhite) {
 
 		BossEnemy* boss = scene->GetGameObject<BossEnemy>(1);
+
 		if (boss != nullptr) {
 			if ((boss->GetMode() != BWMode::pblack && Mode != BWMode::ewhite) ||
 				(boss->GetMode() != BWMode::pwhite && Mode != BWMode::eblack)) {
@@ -101,7 +102,7 @@ void Bullet::Update()
 					std::vector<Bullet*> bulletlist = scene->GetGameObjects<Bullet>(1);
 
 					SetDestroy();
-					scene->AddGameObject<Explosion>(1)->SetPosition(boss->GetPosition() + D3DXVECTOR3(0.0f, 0.5f, 0.0f));
+					scene->AddGameObject<Explosion>(1)->SetPosition(Position + D3DXVECTOR3(0.0f, 0.5f, 0.0f));
 
 					//UI、ステータスの変更を追加する↓
 					scene->GetGameObject<BossEnemy>(1)->UseLife();
@@ -181,8 +182,9 @@ bool Bullet::BossOBB()
 	BossEnemy* enemy = scene->GetGameObject<BossEnemy>(1);
 	Enemy* benemy = enemy->GetEn(1);
 
-	D3DXVECTOR3 pPosition = benemy->GetPosition();
-	D3DXVECTOR3 direction = Position - pPosition;
+	D3DXVECTOR3 bPosition = benemy->GetPosition();
+	D3DXVECTOR3 direction = Position - bPosition;
+
 	float length = D3DXVec3Length(&direction);
 	if (length > 2.0f) return false;
 

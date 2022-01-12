@@ -79,9 +79,13 @@ void BossEnemy::Update()
 		SetDestroy();
 	}
 
-	en[1]->SetPosition(Position + D3DXVECTOR3(fcos, 0.f, fsin));
+	en[0]->SetRotation(Rotation);
+	en[0]->SetScale(Scale);
+	en[0]->SetEnemy(Position, BWMode::eblack);
+
 	en[1]->SetRotation(Rotation);
 	en[1]->SetScale(Scale);
+	en[1]->SetEnemy(Position + D3DXVECTOR3(fcos, 0.f, fsin), BWMode::eblack);
 }
 
 void BossEnemy::Draw()

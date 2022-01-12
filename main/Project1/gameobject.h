@@ -56,7 +56,7 @@ public:
         D3DXMatrixScaling(&scale, Scale.x, Scale.y, Scale.z);
         D3DXMatrixTranslation(&trans, Position.x, Position.y, Position.z);
 
-        if (Quaternion != nullptr) {
+        if (Quaternion != D3DXVECTOR3(0, 0, 0)) {
             D3DXMatrixRotationQuaternion(&rot, &Quaternion);
         }
         else {
@@ -77,7 +77,7 @@ public:
         D3DXMATRIX world, scale, rot, trans;
         D3DXMatrixScaling(&scale, Scale.x, Scale.y, Scale.z);
 
-        if (Quaternion != nullptr) {
+        if (Quaternion) {
             D3DXMatrixRotationQuaternion(&rot, &Quaternion);
         }
         else {
@@ -99,7 +99,7 @@ public:
         D3DXMATRIX world, scale, rot, trans;
         D3DXMatrixScaling(&scale, Scale.x, Scale.y, Scale.z);
 
-        if (Quaternion != nullptr) {
+        if (Quaternion) {
             D3DXMatrixRotationQuaternion(&rot, &Quaternion);
         }
         else {
