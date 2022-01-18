@@ -14,6 +14,7 @@ private:
     ID3D11InputLayout* VertexLayout = nullptr;
 
     float speed = 0.f;
+    int enemynum = 0;
 
     bool PlayerOBB();
     bool BossOBB();

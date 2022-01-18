@@ -15,12 +15,17 @@ private:
     ID3D11PixelShader* PixelShader = NULL;
     ID3D11InputLayout* VertexLayout = NULL;
 
+    const int MAXENEMY = 5;
+    const int MAXLIFE = 20;
+
     float rot = 0.f;
     float fsin = 0.f;
     float fcos = 0.f;
     int a = 0;
-    int life = 20;
+    int* life = new int[MAXENEMY];
     bool re = false;
+
+    D3DXVECTOR3 ti;
 
 public:
     void Init();
@@ -30,7 +35,7 @@ public:
 
     Enemy* GetEn(int num) const { return en[num]; }
 
-    void UseLife() { life--; }
+    void UseLife(int num) { life[num]--; }
 
     static void Load();
     static void UnLoad();

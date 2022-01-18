@@ -20,9 +20,13 @@ void BossEnemy::Init()
 	Scale = D3DXVECTOR3(2.0f, 2.0f, 2.0f);
 	Mode = BWMode::eblack;
 
-	for (int i = 0; i < 2; i++) {
+	ti = Rotation;
+
+	for (int i = 0; i < MAXENEMY; i++) {
 		en[i] = new Enemy();
+		life[i] = MAXLIFE;
 	}
+	life[0] = MAXLIFE * 2;
 
 	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "vertexLightingVS.cso");
 	Renderer::CreatePixelShader(&PixelShader, "vertexLightingPS.cso");
@@ -42,7 +46,6 @@ void BossEnemy::Update()
 	std::uniform_int_distribution<> r(1, 10);
 
 	rot += 0.05f;
-
 	fsin = 4 * sinf(rot);
 	fcos = 4 * cosf(rot);
 
@@ -50,14 +53,14 @@ void BossEnemy::Update()
 		re = true;
 	}
 	else if(!re){
-		Position.x += 0.1f;
+		Position.x += 0.05f;
 	}
 
 	if (Position.x <= -25.f) {
 		re = false;
 	}
 	else if(re) {
-		Position.x -= 0.1f;
+		Position.x -= 0.05f;
 	}
 
 	if (a == 0) {
@@ -73,19 +76,43 @@ void BossEnemy::Update()
 		a = 0;
 	}
 
-	Rotation.y += 0.02f;
+	Rotation.y += 0.03f;
+	ti.y += 0.05f;
 
-	if (life <= 0) {
-		SetDestroy();
+	for (int i = 0; i < MAXENEMY; i++) {
+		if (life[i] <= 0) {
+			en[i] = nullptr;
+
+			if (i == 0) {
+				SetDestroy();
+			}
+		}
 	}
-
-	en[0]->SetRotation(Rotation);
-	en[0]->SetScale(Scale);
-	en[0]->SetEnemy(Position, BWMode::eblack);
-
-	en[1]->SetRotation(Rotation);
-	en[1]->SetScale(Scale);
-	en[1]->SetEnemy(Position + D3DXVECTOR3(fcos, 0.f, fsin), BWMode::eblack);
+	if (en[0] != nullptr) {
+		en[0]->SetRotation(Rotation);
+		en[0]->SetScale(Scale);
+		en[0]->SetEnemy(Position, BWMode::eblack);
+	}
+	if (en[1] != nullptr) {
+		en[1]->SetRotation(ti);
+		en[1]->SetScale(Scale);
+		en[1]->SetEnemy(Position + D3DXVECTOR3(fcos, 0.f, fsin), BWMode::eblack);
+	}
+	if (en[2] != nullptr) {
+		en[2]->SetRotation(Rotation);
+		en[2]->SetScale(Scale);
+		en[2]->SetEnemy(Position + D3DXVECTOR3(-fcos, 0.f, fsin), BWMode::eblack);
+	}
+	if (en[3] != nullptr) {
+		en[3]->SetRotation(Rotation);
+		en[3]->SetScale(Scale);
+		en[3]->SetEnemy(Position + D3DXVECTOR3(fcos, 0.f, -fsin), BWMode::eblack);
+	}
+	if (en[4] != nullptr) {
+		en[4]->SetRotation(ti);
+		en[4]->SetScale(Scale);
+		en[4]->SetEnemy(Position + D3DXVECTOR3(-fcos, 0.f, -fsin), BWMode::eblack);
+	}
 }
 
 void BossEnemy::Draw()
@@ -105,19 +132,24 @@ void BossEnemy::Draw()
 	Renderer::SetWorldMatrix(&world);
 	en[0]->EnemyModel->Draw();
 
-	D3DXVECTOR3 p = en[1]->GetPosition();
-	D3DXMatrixTranslation(&t, p.x, p.y, p.z);
-	world = s * r * t;
-	Renderer::SetWorldMatrix(&world);
-	en[1]->EnemyModel->Draw();
-
+	for (int i = 1; i < MAXENEMY; i++) {
+		if (en[i] != nullptr) {
+			D3DXVECTOR3 p = en[i]->GetPosition();
+			D3DXVECTOR3 k = en[i]->GetRotation();
+			D3DXMatrixRotationYawPitchRoll(&r, k.y, k.x, k.z);
+			D3DXMatrixTranslation(&t, p.x, p.y, p.z);
+			world = s * r * t;
+			Renderer::SetWorldMatrix(&world);
+			en[i]->EnemyModel->Draw();
+		}
+	}
 }
 
 void BossEnemy::Load()
 {
 	int i = 0;
 
-	for (int j = 0; j < 5; j++) {
+	for (int j = 0; j < 6; j++) {
 		if (i == 0) {
 			en[j]->EnemyModel = new Model();
 			en[j]->EnemyModel->Load("Asset\\Models\\e_black.obj");

@@ -105,7 +105,7 @@ void Bullet::Update()
 					scene->AddGameObject<Explosion>(1)->SetPosition(Position + D3DXVECTOR3(0.0f, 0.5f, 0.0f));
 
 					//UI、ステータスの変更を追加する↓
-					scene->GetGameObject<BossEnemy>(1)->UseLife();
+					scene->GetGameObject<BossEnemy>(1)->UseLife(enemynum);
 				}
 			}
 		}
@@ -180,41 +180,48 @@ bool Bullet::BossOBB()
 {
 	Scene* scene = Manager::GetScene();
 	BossEnemy* enemy = scene->GetGameObject<BossEnemy>(1);
-	Enemy* benemy = enemy->GetEn(1);
 
-	D3DXVECTOR3 bPosition = benemy->GetPosition();
-	D3DXVECTOR3 direction = Position - bPosition;
+	for (int i = 0; i < 5; i++) {
+		Enemy* benemy = enemy->GetEn(i);
+		if (benemy != nullptr) {
+			D3DXVECTOR3 bPosition = benemy->GetPosition();
+			D3DXVECTOR3 direction = Position - bPosition;
 
-	float length = D3DXVec3Length(&direction);
-	if (length > 2.0f) return false;
+			float length = D3DXVec3Length(&direction);
+			if (length > 2.0f) continue;
 
-	D3DXVECTOR3 obbX, obbY, obbZ;
-	float obbLenX, obbLenY, obbLenZ;
+			D3DXVECTOR3 obbX, obbY, obbZ;
+			float obbLenX, obbLenY, obbLenZ;
 
-	obbX = benemy->GetOBBX();
-	obbLenX = D3DXVec3Length(&obbX);
-	obbX /= obbLenX;
+			obbX = benemy->GetOBBX();
+			obbLenX = D3DXVec3Length(&obbX);
+			obbX /= obbLenX;
 
-	obbY = benemy->GetOBBY();
-	obbLenY = D3DXVec3Length(&obbY);
-	obbY /= obbLenY;
+			obbY = benemy->GetOBBY();
+			obbLenY = D3DXVec3Length(&obbY);
+			obbY /= obbLenY;
 
-	obbZ = benemy->GetOBBZ();
-	obbLenZ = D3DXVec3Length(&obbZ);
-	obbZ /= obbLenZ;
+			obbZ = benemy->GetOBBZ();
+			obbLenZ = D3DXVec3Length(&obbZ);
+			obbZ /= obbLenZ;
 
-	float lenX, lenY, lenZ;
+			float lenX, lenY, lenZ;
 
-	lenX = D3DXVec3Dot(&obbX, &direction);
-	lenY = D3DXVec3Dot(&obbY, &direction);
-	lenZ = D3DXVec3Dot(&obbZ, &direction);
+			lenX = D3DXVec3Dot(&obbX, &direction);
+			lenY = D3DXVec3Dot(&obbY, &direction);
+			lenZ = D3DXVec3Dot(&obbZ, &direction);
 
-	if (fabs(lenX) < obbLenX && fabs(lenZ) < obbLenZ && fabs(lenY) < obbLenY) {
-		return true;
+			if (fabs(lenX) < obbLenX && fabs(lenZ) < obbLenZ && fabs(lenY) < obbLenY) {
+				enemynum = i;
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
 	}
-	else {
-		return false;
-	}
+
+	return false;
 }
 
 void Bullet::Load()

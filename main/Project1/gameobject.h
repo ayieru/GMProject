@@ -34,7 +34,7 @@ public:
     //Get関数
     BWMode GetMode() { return Mode; }
     D3DXVECTOR3 GetPosition() { return Position; }
-
+    D3DXVECTOR3 GetRotation() { return Rotation; }
     //前方向ベクトル
     D3DXVECTOR3 GetForward() 
     {
@@ -48,7 +48,6 @@ public:
 
         return forward;
     }
-
     //OBBの生成
     D3DXVECTOR3 GetOBBX()
     {
