@@ -93,6 +93,7 @@ void Bullet::Update()
 	if (Mode == BWMode::pblack || Mode == BWMode::pwhite) {
 
 		BossEnemy* boss = scene->GetGameObject<BossEnemy>(1);
+
 		if (boss != nullptr) {
 			if ((boss->GetMode() != BWMode::pblack && Mode != BWMode::ewhite) ||
 				(boss->GetMode() != BWMode::pwhite && Mode != BWMode::eblack)) {
@@ -101,10 +102,10 @@ void Bullet::Update()
 					std::vector<Bullet*> bulletlist = scene->GetGameObjects<Bullet>(1);
 
 					SetDestroy();
-					scene->AddGameObject<Explosion>(1)->SetPosition(boss->GetPosition() + D3DXVECTOR3(0.0f, 0.5f, 0.0f));
+					scene->AddGameObject<Explosion>(1)->SetPosition(Position + D3DXVECTOR3(0.0f, 0.5f, 0.0f));
 
 					//UI、ステータスの変更を追加する↓
-					scene->GetGameObject<BossEnemy>(1)->UseLife();
+					scene->GetGameObject<BossEnemy>(1)->UseLife(enemynum);
 				}
 			}
 		}
@@ -180,36 +181,47 @@ bool Bullet::BossOBB()
 	Scene* scene = Manager::GetScene();
 	BossEnemy* enemy = scene->GetGameObject<BossEnemy>(1);
 
-	D3DXVECTOR3 pPosition = enemy->GetPosition();
-	D3DXVECTOR3 direction = Position - pPosition;
+	for (int i = 0; i < 5; i++) {
+		Enemy* benemy = enemy->GetEn(i);
+		if (benemy != nullptr) {
+			D3DXVECTOR3 bPosition = benemy->GetPosition();
+			D3DXVECTOR3 direction = Position - bPosition;
 
-	D3DXVECTOR3 obbX, obbY, obbZ;
-	float obbLenX, obbLenY, obbLenZ;
+			float length = D3DXVec3Length(&direction);
+			if (length > 2.0f) continue;
 
-	obbX = enemy->GetOBBX();
-	obbLenX = D3DXVec3Length(&obbX);
-	obbX /= obbLenX;
+			D3DXVECTOR3 obbX, obbY, obbZ;
+			float obbLenX, obbLenY, obbLenZ;
 
-	obbY = enemy->GetOBBY();
-	obbLenY = D3DXVec3Length(&obbY);
-	obbY /= obbLenY;
+			obbX = benemy->GetOBBX();
+			obbLenX = D3DXVec3Length(&obbX);
+			obbX /= obbLenX;
 
-	obbZ = enemy->GetOBBZ();
-	obbLenZ = D3DXVec3Length(&obbZ);
-	obbZ /= obbLenZ;
+			obbY = benemy->GetOBBY();
+			obbLenY = D3DXVec3Length(&obbY);
+			obbY /= obbLenY;
 
-	float lenX, lenY, lenZ;
+			obbZ = benemy->GetOBBZ();
+			obbLenZ = D3DXVec3Length(&obbZ);
+			obbZ /= obbLenZ;
 
-	lenX = D3DXVec3Dot(&obbX, &direction);
-	lenY = D3DXVec3Dot(&obbY, &direction);
-	lenZ = D3DXVec3Dot(&obbZ, &direction);
+			float lenX, lenY, lenZ;
 
-	if (fabs(lenX) < obbLenX && fabs(lenZ) < obbLenZ && fabs(lenY) < obbLenY) {
-		return true;
+			lenX = D3DXVec3Dot(&obbX, &direction);
+			lenY = D3DXVec3Dot(&obbY, &direction);
+			lenZ = D3DXVec3Dot(&obbZ, &direction);
+
+			if (fabs(lenX) < obbLenX && fabs(lenZ) < obbLenZ && fabs(lenY) < obbLenY) {
+				enemynum = i;
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
 	}
-	else {
-		return false;
-	}
+
+	return false;
 }
 
 void Bullet::Load()

@@ -7,18 +7,6 @@
   </ProjectOutputs>
   <ContentFiles>
     <ContentFile>
-      <FullPath>F:\GMProject\main\Project1\pixelLightingRimPS.cso</FullPath>
-    </ContentFile>
-    <ContentFile>
-      <FullPath>F:\GMProject\main\Project1\pixelLightingRimVS.cso</FullPath>
-    </ContentFile>
-    <ContentFile>
-      <FullPath>F:\GMProject\main\Project1\toonPS.cso</FullPath>
-    </ContentFile>
-    <ContentFile>
-      <FullPath>F:\GMProject\main\Project1\toonVS.cso</FullPath>
-    </ContentFile>
-    <ContentFile>
       <FullPath>F:\GMProject\main\Project1\unlitTexturePS.cso</FullPath>
     </ContentFile>
     <ContentFile>

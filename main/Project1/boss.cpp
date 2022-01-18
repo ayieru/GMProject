@@ -11,7 +11,7 @@
 #include <iostream>
 #include <random>
 
-Model* BossEnemy::BossModel[5];
+Enemy* BossEnemy::en[5];
 
 void BossEnemy::Init()
 {
@@ -19,6 +19,14 @@ void BossEnemy::Init()
 	Rotation = D3DXVECTOR3(0.0f, 1.0f, 1.0f);
 	Scale = D3DXVECTOR3(2.0f, 2.0f, 2.0f);
 	Mode = BWMode::eblack;
+
+	ti = Rotation;
+
+	for (int i = 0; i < MAXENEMY; i++) {
+		en[i] = new Enemy();
+		life[i] = MAXLIFE;
+	}
+	life[0] = MAXLIFE * 2;
 
 	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "vertexLightingVS.cso");
 	Renderer::CreatePixelShader(&PixelShader, "vertexLightingPS.cso");
@@ -38,7 +46,6 @@ void BossEnemy::Update()
 	std::uniform_int_distribution<> r(1, 10);
 
 	rot += 0.05f;
-
 	fsin = 4 * sinf(rot);
 	fcos = 4 * cosf(rot);
 
@@ -46,14 +53,14 @@ void BossEnemy::Update()
 		re = true;
 	}
 	else if(!re){
-		Position.x += 0.1f;
+		Position.x += 0.05f;
 	}
 
 	if (Position.x <= -25.f) {
 		re = false;
 	}
 	else if(re) {
-		Position.x -= 0.1f;
+		Position.x -= 0.05f;
 	}
 
 	if (a == 0) {
@@ -69,10 +76,42 @@ void BossEnemy::Update()
 		a = 0;
 	}
 
-	Rotation.y += 0.02f;
+	Rotation.y += 0.03f;
+	ti.y += 0.05f;
 
-	if (life <= 0) {
-		SetDestroy();
+	for (int i = 0; i < MAXENEMY; i++) {
+		if (life[i] <= 0) {
+			en[i] = nullptr;
+
+			if (i == 0) {
+				SetDestroy();
+			}
+		}
+	}
+	if (en[0] != nullptr) {
+		en[0]->SetRotation(Rotation);
+		en[0]->SetScale(Scale);
+		en[0]->SetEnemy(Position, BWMode::eblack);
+	}
+	if (en[1] != nullptr) {
+		en[1]->SetRotation(ti);
+		en[1]->SetScale(Scale);
+		en[1]->SetEnemy(Position + D3DXVECTOR3(fcos, 0.f, fsin), BWMode::eblack);
+	}
+	if (en[2] != nullptr) {
+		en[2]->SetRotation(Rotation);
+		en[2]->SetScale(Scale);
+		en[2]->SetEnemy(Position + D3DXVECTOR3(-fcos, 0.f, fsin), BWMode::eblack);
+	}
+	if (en[3] != nullptr) {
+		en[3]->SetRotation(Rotation);
+		en[3]->SetScale(Scale);
+		en[3]->SetEnemy(Position + D3DXVECTOR3(fcos, 0.f, -fsin), BWMode::eblack);
+	}
+	if (en[4] != nullptr) {
+		en[4]->SetRotation(ti);
+		en[4]->SetScale(Scale);
+		en[4]->SetEnemy(Position + D3DXVECTOR3(-fcos, 0.f, -fsin), BWMode::eblack);
 	}
 }
 
@@ -91,50 +130,41 @@ void BossEnemy::Draw()
 	D3DXMatrixTranslation(&t, Position.x, Position.y, Position.z);
 	world = s * r * t;
 	Renderer::SetWorldMatrix(&world);
-	BossModel[0]->Draw();
+	en[0]->EnemyModel->Draw();
 
-	D3DXMatrixTranslation(&t, Position.x + fcos, Position.y, Position.z + fsin);
-	world = s * r * t;
-	Renderer::SetWorldMatrix(&world);
-	BossModel[1]->Draw();
-
-	D3DXMatrixTranslation(&t, Position.x - fcos, Position.y, Position.z + fsin);
-	world = s * r * t;
-	Renderer::SetWorldMatrix(&world);
-	BossModel[2]->Draw();
-
-	D3DXMatrixTranslation(&t, Position.x + fcos, Position.y, Position.z - fsin);
-	world = s * r * t;
-	Renderer::SetWorldMatrix(&world);
-	BossModel[3]->Draw();
-
-	D3DXMatrixTranslation(&t, Position.x - fcos, Position.y, Position.z - fsin);
-	world = s * r * t;
-	Renderer::SetWorldMatrix(&world);
-	BossModel[4]->Draw();
-
+	for (int i = 1; i < MAXENEMY; i++) {
+		if (en[i] != nullptr) {
+			D3DXVECTOR3 p = en[i]->GetPosition();
+			D3DXVECTOR3 k = en[i]->GetRotation();
+			D3DXMatrixRotationYawPitchRoll(&r, k.y, k.x, k.z);
+			D3DXMatrixTranslation(&t, p.x, p.y, p.z);
+			world = s * r * t;
+			Renderer::SetWorldMatrix(&world);
+			en[i]->EnemyModel->Draw();
+		}
+	}
 }
 
 void BossEnemy::Load()
 {
 	int i = 0;
 
-	for (int j = 0; j < 5; j++) {
+	for (int j = 0; j < 6; j++) {
 		if (i == 0) {
-			BossModel[j] = new Model();
-			BossModel[j]->Load("Asset\\Models\\e_black.obj");
+			en[j]->EnemyModel = new Model();
+			en[j]->EnemyModel->Load("Asset\\Models\\e_black.obj");
 			i++;
 		}
 		else {
-			BossModel[j] = new Model();
-			BossModel[j]->Load("Asset\\Models\\e_white.obj");
+			en[j]->EnemyModel = new Model();
+			en[j]->EnemyModel->Load("Asset\\Models\\e_white.obj");
 		}
 	}
 }
 
 void BossEnemy::UnLoad()
 {
-	for (int i = 0; i < 5; i++) {
-		BossModel[i]->Unload();
-	}
+	//for (int i = 0; i < 5; i++) {
+	//	en[i]->EnemyModel->Unload();
+	//}
 }

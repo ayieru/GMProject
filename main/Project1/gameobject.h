@@ -34,7 +34,7 @@ public:
     //Get関数
     BWMode GetMode() { return Mode; }
     D3DXVECTOR3 GetPosition() { return Position; }
-
+    D3DXVECTOR3 GetRotation() { return Rotation; }
     //前方向ベクトル
     D3DXVECTOR3 GetForward() 
     {
@@ -48,7 +48,6 @@ public:
 
         return forward;
     }
-
     //OBBの生成
     D3DXVECTOR3 GetOBBX()
     {
@@ -56,7 +55,7 @@ public:
         D3DXMatrixScaling(&scale, Scale.x, Scale.y, Scale.z);
         D3DXMatrixTranslation(&trans, Position.x, Position.y, Position.z);
 
-        if (Quaternion != nullptr) {
+        if (Quaternion != D3DXVECTOR3(0, 0, 0)) {
             D3DXMatrixRotationQuaternion(&rot, &Quaternion);
         }
         else {
@@ -77,7 +76,7 @@ public:
         D3DXMATRIX world, scale, rot, trans;
         D3DXMatrixScaling(&scale, Scale.x, Scale.y, Scale.z);
 
-        if (Quaternion != nullptr) {
+        if (Quaternion) {
             D3DXMatrixRotationQuaternion(&rot, &Quaternion);
         }
         else {
@@ -99,7 +98,7 @@ public:
         D3DXMATRIX world, scale, rot, trans;
         D3DXMatrixScaling(&scale, Scale.x, Scale.y, Scale.z);
 
-        if (Quaternion != nullptr) {
+        if (Quaternion) {
             D3DXMatrixRotationQuaternion(&rot, &Quaternion);
         }
         else {
@@ -119,6 +118,8 @@ public:
 
     //Set関数
     void SetPosition(D3DXVECTOR3 sPosition) { Position = sPosition; }
+    void SetRotation(D3DXVECTOR3 sRotation) { Rotation = sRotation; }
+    void SetScale(D3DXVECTOR3 sScale) { Scale = sScale; }
     void SetEnemy(D3DXVECTOR3 sPosition, BWMode sMode) { Position = sPosition, Mode = sMode; }
     void SetForward(D3DXVECTOR3 sPosition, D3DXVECTOR3 sForward) { Position = sPosition, Forward = sForward; }
     void SetBullet(D3DXVECTOR3 sPosition, D3DXVECTOR3 sForward, BWMode sMode) { Position = sPosition, Forward = sForward, Mode = sMode; }
