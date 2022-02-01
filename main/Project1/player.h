@@ -8,7 +8,6 @@ class Player : public GameObject
 private:
 
     static class Model* b_model;
-
     static class Model* w_model;
 
     ID3D11VertexShader* VertexShader = NULL;

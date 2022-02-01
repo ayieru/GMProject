@@ -25,7 +25,6 @@ class Spawn :public GameObject
 {
 private:
 
-	int max = 31;
 	int frame;
 
 	std::list<EnemySpawn> SpawnData{};

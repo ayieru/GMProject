@@ -12,6 +12,7 @@
 #include "camera.h"
 #include "UI.h"
 #include "white.h"
+#include "score.h"
 
 #include <string>
 #include <iostream>
@@ -36,6 +37,9 @@ void Player::Init()
 	Scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 
 	D3DXQuaternionIdentity(&Quaternion);
+	Scene* scene = Manager::GetScene();
+
+	scene->AddGameObject<Score>(2)->SetPosition(Position);
 }
 
 void Player::Uninit()
@@ -55,10 +59,8 @@ void Player::Update()
 {
 	D3DXVECTOR3 forward = GetForward();
 
-	//ˆÚ“®
-	if (Position.z < -25.f || Position.x > 10.f || Position.x < -40.f) {
 
-	}
+	//ˆÚ“®
 	if (GetAsyncKeyState(VK_J)) {
 		if (GetAsyncKeyState(VK_W) && Position.z < 21.0f) Position += forward * 0.1f * 0.5f;
 		if (GetAsyncKeyState(VK_S)) Position -= forward * 0.1f * 0.5f;
@@ -76,8 +78,7 @@ void Player::Update()
 	if (GetAsyncKeyState(VK_K)) {
 		if (a == 0) {
 			Audio* se = Manager::GetScene()->AddGameObject<Audio>(2);
-			se->Load("Asset\\Audio\\02.wav");
-			//se->Play(false);
+			se->PlaySE(SE::shot2);
 			Manager::GetScene()->AddGameObject<Bullet>(1)->
 				SetBullet(Position + D3DXVECTOR3(0.f, 1.f, 0.f), forward, Mode);
 		}
@@ -93,8 +94,8 @@ void Player::Update()
 
 	//sp
 	if (GetAsyncKeyState(VK_L)) {
-		Scene* scene = Manager::GetScene();
 		if (intervaltime == 0) {
+			Scene* scene = Manager::GetScene();
 			if (scene->GetGameObject<UI>(2)->GetSpecial() > 0) {
 				scene->AddGameObject<White>(1);
 				std::vector<Enemy*> lifelist = scene->GetGameObjects<Enemy>(1);
@@ -123,9 +124,8 @@ void Player::Update()
 	//Ø‚è‘Ö‚¦
 	if (GetAsyncKeyState(VK_SPACE)) {
 		if (b == false) {
-			Audio* bgm = Manager::GetScene()->AddGameObject<Audio>(2);
-			bgm->Load("Asset\\Audio\\02.wav");
-			//bgm->Play(false);
+			Audio* se = Manager::GetScene()->AddGameObject<Audio>(2);
+			se->PlaySE(SE::shot);
 
 			if (Mode == BWMode::pblack){
 				Mode = BWMode::pwhite;

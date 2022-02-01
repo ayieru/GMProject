@@ -60,7 +60,7 @@ void Spawn::Update()
 	}
 
 	for (EnemySpawn &q : SpawnData) {
-		if (frame > q.spawn_frame) {
+		if (frame >= q.spawn_frame) {
 			if (frame == q.spawn_frame) {
 				D3DXVECTOR3 pos = D3DXVECTOR3(q.x, -20.3f, q.y);
 				Manager::GetScene()->AddGameObject<Enemy>(1)->SetEnemy(pos, q.mode);

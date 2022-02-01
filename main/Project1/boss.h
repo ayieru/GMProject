@@ -11,12 +11,14 @@ private:
 
     static Enemy* en[];
 
+    const int MAXENEMY = 5;
+    const int MAXLIFE = 20;
+
     ID3D11VertexShader* VertexShader = NULL;
     ID3D11PixelShader* PixelShader = NULL;
     ID3D11InputLayout* VertexLayout = NULL;
 
-    const int MAXENEMY = 5;
-    const int MAXLIFE = 20;
+    D3DXVECTOR3* Eposition = new D3DXVECTOR3[MAXENEMY];
 
     float rot = 0.f;
     float fsin = 0.f;
@@ -24,6 +26,7 @@ private:
     int a = 0;
     int* life = new int[MAXENEMY];
     bool re = false;
+    bool A = false;
 
     D3DXVECTOR3 ti;
 

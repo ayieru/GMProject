@@ -166,6 +166,7 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="explosion.cpp" />
+    <ClCompile Include="explosion2.cpp" />
     <ClCompile Include="field.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
@@ -175,6 +176,7 @@
     <ClCompile Include="polygon2D.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="result.cpp" />
+    <ClCompile Include="score.cpp" />
     <ClCompile Include="skydoom.cpp" />
     <ClCompile Include="spawn.cpp" />
     <ClCompile Include="title.cpp" />
@@ -194,6 +196,7 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="explosion.h" />
+    <ClInclude Include="explosion2.h" />
     <ClInclude Include="field.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameobject.h" />
@@ -206,6 +209,7 @@
     <ClInclude Include="result.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="bullet.h" />
+    <ClInclude Include="score.h" />
     <ClInclude Include="skydoom.h" />
     <ClInclude Include="spawn.h" />
     <ClInclude Include="time.h" />

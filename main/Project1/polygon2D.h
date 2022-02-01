@@ -16,4 +16,7 @@ public:
     void Uninit();
     void Update();
 	void Draw();
+
+	void SetTextrue(const char* Filename, float x, float y);
+
 };

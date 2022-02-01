@@ -3,6 +3,27 @@
 #include <xaudio2.h>
 #include "gameObject.h"
 
+enum class SE {
+	shot,
+	shot2,
+	hit,
+	cursor,
+	select,
+	ex,
+	SEMAX,
+};
+
+enum class BGM {
+	main,
+	game,
+	BGMMAX,
+};
+
+typedef struct
+{
+	const char* pFilename;	
+	bool Loop;		
+} AudioParam;
 
 class Audio : public GameObject
 {
@@ -16,6 +37,11 @@ private:
 	int						m_Length;
 	int						m_PlayLength;
 
+	static AudioParam sedata[];
+	static AudioParam bgmdata[];
+
+	static Audio* se[];
+	static Audio* bgm[];
 
 public:
 	static void InitMaster();
@@ -29,6 +55,7 @@ public:
 	void Load(const char *FileName);
 	void Play(bool Loop = false);
 
-
+	void PlaySE(SE num);
+	void PlayBGM(BGM num);
 };
 
