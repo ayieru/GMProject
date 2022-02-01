@@ -11,6 +11,7 @@
 #include "enemy.h"
 #include "bullet.h"
 #include "explosion.h"
+#include "explosion2.h"
 #include "skydoom.h"
 #include "audio.h"
 #include "game.h"
@@ -21,6 +22,7 @@
 #include "white.h"
 #include "spawn.h"
 #include "boss.h"
+#include "score.h"
 
 
 void Game::Init()
@@ -36,13 +38,8 @@ void Game::Init()
 	AddGameObject<Player>(1);
 	AddGameObject<BossEnemy>(1);
 
-	//Audio* bgm = AddGameObject<Audio>(2);
-	//bgm->Load("");
-	//bgm->Play(true);
-
 	Audio* bgm = AddGameObject<Audio>(2);
-	bgm->Load("Asset\\Audio\\01.wav");
-	//bgm->Play(true);
+	bgm->PlayBGM(BGM::game);
 }
 
 void Game::Uninit()

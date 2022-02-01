@@ -6,6 +6,8 @@
 #include "boss.h"
 #include "bullet.h"
 #include "game.h"
+#include "explosion2.h"
+#include "audio.h"
 
 #include <string>
 #include <iostream>
@@ -19,6 +21,10 @@ void BossEnemy::Init()
 	Rotation = D3DXVECTOR3(0.0f, 1.0f, 1.0f);
 	Scale = D3DXVECTOR3(2.0f, 2.0f, 2.0f);
 	Mode = BWMode::eblack;
+
+	for (int i = 0; i < MAXENEMY; i++) {
+		Eposition[i] = Position;
+	}
 
 	ti = Rotation;
 
@@ -41,51 +47,27 @@ void BossEnemy::Uninit()
 
 void BossEnemy::Update()
 {
-	std::random_device rnd;
-	std::mt19937 mt(rnd());
-	std::uniform_int_distribution<> r(1, 10);
+	Scene* scene = Manager::GetScene();
 
+	//位置更新
 	rot += 0.05f;
 	fsin = 4 * sinf(rot);
 	fcos = 4 * cosf(rot);
 
-	if (Position.x >= 0.f) {
-		re = true;
-	}
-	else if(!re){
-		Position.x += 0.05f;
-	}
+	//ボス位置
+	{
+		if (Position.x >= 0.f) {
+			re = true;
+		}
+		else if (!re) {
+			Position.x += 0.05f;
+		}
 
-	if (Position.x <= -25.f) {
-		re = false;
-	}
-	else if(re) {
-		Position.x -= 0.05f;
-	}
-
-	if (a == 0) {
-		Manager::GetScene()->AddGameObject<Bullet>(1)->
-			SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, -1.0f), Mode);
-		Manager::GetScene()->AddGameObject<Bullet>(1)->
-			SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.2f, 0.0f, -1.0f), Mode);
-		Manager::GetScene()->AddGameObject<Bullet>(1)->
-			SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-0.2f, 0.0f, -1.0f), Mode);
-	}
-	a++;
-	if (a > 10) {
-		a = 0;
-	}
-
-	Rotation.y += 0.03f;
-	ti.y += 0.05f;
-
-	for (int i = 0; i < MAXENEMY; i++) {
-		if (life[i] <= 0) {
-			en[i] = nullptr;
-
-			if (i == 0) {
-				SetDestroy();
-			}
+		if (Position.x <= -25.f) {
+			re = false;
+		}
+		else if (re) {
+			Position.x -= 0.05f;
 		}
 	}
 	if (en[0] != nullptr) {
@@ -94,25 +76,64 @@ void BossEnemy::Update()
 		en[0]->SetEnemy(Position, BWMode::eblack);
 	}
 	if (en[1] != nullptr) {
+		Eposition[1] = Position + D3DXVECTOR3(fcos, 0.f, fsin);
 		en[1]->SetRotation(ti);
 		en[1]->SetScale(Scale);
-		en[1]->SetEnemy(Position + D3DXVECTOR3(fcos, 0.f, fsin), BWMode::eblack);
+		en[1]->SetEnemy(Eposition[1], BWMode::eblack);
 	}
 	if (en[2] != nullptr) {
+		Eposition[2] = Position + D3DXVECTOR3(-fcos, 0.f, fsin);
 		en[2]->SetRotation(Rotation);
 		en[2]->SetScale(Scale);
-		en[2]->SetEnemy(Position + D3DXVECTOR3(-fcos, 0.f, fsin), BWMode::eblack);
+		en[2]->SetEnemy(Eposition[2], BWMode::eblack);
 	}
 	if (en[3] != nullptr) {
+		Eposition[3] = Position + D3DXVECTOR3(fcos, 0.f, -fsin);
 		en[3]->SetRotation(Rotation);
 		en[3]->SetScale(Scale);
-		en[3]->SetEnemy(Position + D3DXVECTOR3(fcos, 0.f, -fsin), BWMode::eblack);
+		en[3]->SetEnemy(Eposition[3], BWMode::eblack);
 	}
 	if (en[4] != nullptr) {
+		Eposition[4] = Position + D3DXVECTOR3(-fcos, 0.f, -fsin);
 		en[4]->SetRotation(ti);
 		en[4]->SetScale(Scale);
-		en[4]->SetEnemy(Position + D3DXVECTOR3(-fcos, 0.f, -fsin), BWMode::eblack);
+		en[4]->SetEnemy(Eposition[4], BWMode::eblack);
 	}
+	
+	//回転更新
+	Rotation.y += 0.03f;
+	ti.y += 0.05f;
+
+	//弾
+	if (a % 2 == 1) {
+		scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), GetForward(), BWMode::ewhite);
+	}
+	if (a == 0) {
+		scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, -1.f), Mode);
+		scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.2f, 0.0f, -1.f), Mode);
+		scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-0.2f, 0.0f, -1.f), Mode);
+		scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.4f, 0.0f, -1.f), Mode);
+		scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-0.4f, 0.0f, -1.f), Mode);
+	}
+	a++;
+	if (a > 20) {
+		a = 0;
+	}
+
+	for (int i = 0; i < MAXENEMY; i++) {
+		if (life[i] == 0 ) {
+			Audio* se = Manager::GetScene()->AddGameObject<Audio>(2);
+			se->PlaySE(SE::ex);
+			en[i] = nullptr;
+			life[i] = -1;
+			scene->AddGameObject<Explosion2>(1)->SetPosition(Eposition[i]);
+			if (i == 0) {
+				SetDestroy();
+			}
+		}
+	}
+
+	//その他
 }
 
 void BossEnemy::Draw()

@@ -1,6 +1,11 @@
 #pragma once
 #define GAMEOBJECT_MAX (100)
 
+#include <iostream>
+#include <vector>
+#include <string>
+
+
 enum class BWMode {
     pblack,
     pwhite,
@@ -122,7 +127,7 @@ public:
     void SetScale(D3DXVECTOR3 sScale) { Scale = sScale; }
     void SetEnemy(D3DXVECTOR3 sPosition, BWMode sMode) { Position = sPosition, Mode = sMode; }
     void SetForward(D3DXVECTOR3 sPosition, D3DXVECTOR3 sForward) { Position = sPosition, Forward = sForward; }
-    void SetBullet(D3DXVECTOR3 sPosition, D3DXVECTOR3 sForward, BWMode sMode) { Position = sPosition, Forward = sForward, Mode = sMode; }
+    void SetBullet(D3DXVECTOR3 sPosition, D3DXVECTOR3 sForward, BWMode sMode) { Position = sPosition, D3DXVec3Normalize(&Forward,&sForward), Mode = sMode; }
     void SetDestroy() { destroy = true; }
 
     bool Destroy() {

@@ -80,6 +80,12 @@
     <ClCompile Include="boss.cpp">
       <Filter>cpp</Filter>
     </ClCompile>
+    <ClCompile Include="explosion2.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="score.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="manager.h">
@@ -158,6 +164,12 @@
       <Filter>h</Filter>
     </ClInclude>
     <ClInclude Include="boss.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="explosion2.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="score.h">
       <Filter>h</Filter>
     </ClInclude>
   </ItemGroup>

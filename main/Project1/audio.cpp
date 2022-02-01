@@ -9,6 +9,22 @@
 IXAudio2*				Audio::m_Xaudio = NULL;
 IXAudio2MasteringVoice*	Audio::m_MasteringVoice = NULL;
 
+AudioParam Audio::sedata[(unsigned int)SE::SEMAX] = {
+		{"Asset\\Audio\\shot.wav",false},
+		{"Asset\\Audio\\shot2.wav",false}, 
+		{"Asset\\Audio\\hit.wav",false},
+		{"Asset\\Audio\\cursor.wav",false},
+		{"Asset\\Audio\\cursor.wav",false},
+		{"Asset\\Audio\\ex.wav",false},
+};
+
+AudioParam Audio::bgmdata[(unsigned int)SE::SEMAX] = {
+		{"Asset\\Audio\\main.wav",true},
+		{"Asset\\Audio\\Pseudoscience.wav",true},
+};
+
+Audio* Audio::se[(unsigned int)SE::SEMAX];
+Audio* Audio::bgm[(unsigned int)BGM::BGMMAX];
 
 void Audio::InitMaster()
 {
@@ -20,6 +36,15 @@ void Audio::InitMaster()
 
 	// マスタリングボイス生成
 	m_Xaudio->CreateMasteringVoice(&m_MasteringVoice);
+
+	for (int i = 0; i < (unsigned int)SE::SEMAX; i++) {
+		se[i] = new Audio();
+		se[i]->Load(sedata[i].pFilename);
+	}
+	for (int i = 0; i < (unsigned int)BGM::BGMMAX; i++) {
+		bgm[i] = new Audio();
+		bgm[i]->Load(bgmdata[i].pFilename);
+	}
 }
 
 
@@ -29,14 +54,6 @@ void Audio::UninitMaster()
 	m_Xaudio->Release();
 	CoUninitialize();
 }
-
-
-
-
-
-
-
-
 
 void Audio::Load(const char *FileName)
 {
@@ -102,10 +119,11 @@ void Audio::Load(const char *FileName)
 
 
 void Audio::Uninit()
-{
-	m_SourceVoice->Stop();
-	m_SourceVoice->DestroyVoice();
-
+{	
+	if (m_SourceVoice != nullptr) {
+		m_SourceVoice->Stop();
+		m_SourceVoice->DestroyVoice();
+	}
 	delete[] m_SoundData;
 }
 
@@ -144,5 +162,15 @@ void Audio::Play(bool Loop)
 
 }
 
+void Audio::PlaySE(SE num)
+{
+	se[(unsigned int)num]->Play(sedata[(unsigned int)num].Loop);
+}
+
+
+void Audio::PlayBGM(BGM num)
+{
+	bgm[(unsigned int)num]->Play(bgmdata[(unsigned int)num].Loop);
+}
 
 

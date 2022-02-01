@@ -9,6 +9,7 @@
 #include "explosion.h"
 #include "UI.h"
 #include "boss.h"
+#include "audio.h"
 #include <string>
 #include <iostream>
 
@@ -59,6 +60,8 @@ void Bullet::Update()
 				if ((enemy->GetMode() != BWMode::eblack && Mode != BWMode::pwhite) ||
 					(enemy->GetMode() != BWMode::ewhite && Mode != BWMode::pblack)) {
 					enemy->SetDestroy();
+					Audio* se = Manager::GetScene()->AddGameObject<Audio>(2);
+					se->PlaySE(SE::hit);
 					SetDestroy();
 					scene->AddGameObject<Explosion>(1)->SetPosition(enemyPosition);
 				}
@@ -74,7 +77,6 @@ void Bullet::Update()
 
 		if ((player->GetMode() != BWMode::pblack && Mode != BWMode::ewhite) ||
 			(player->GetMode() != BWMode::pwhite && Mode != BWMode::eblack)) {
-
 			if (PlayerOBB()) {
 				std::vector<Bullet*> bulletlist = scene->GetGameObjects<Bullet>(1);
 

@@ -10,7 +10,7 @@
 
 void Result::Init()
 {
-	Polygon2D* title;
+	//Polygon2D* title;
 	//title->Load("Asset\\Texture\\ê}2.png");
 	AddGameObject<Polygon2D>(2);
 
