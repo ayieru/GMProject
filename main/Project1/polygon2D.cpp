@@ -138,8 +138,11 @@ void Polygon2D::SetTextrue(const char* Filename, float x, float y,int Id)
 
 void Polygon2D::DestoryTexture(int Id)
 {
-	Manager::GetScene()->GetGameObjects<Polygon2D>()
-	if (textureId == Id) {
-		SetDestroy();
+	Scene* scene = Manager::GetScene();
+	std::vector<Polygon2D*> list = scene->GetGameObjects<Polygon2D>(2);
+	for (Polygon2D* p : list) {
+		if (Id == p->textureId) {
+			p->SetDestroy();
+		}
 	}
 }

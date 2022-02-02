@@ -55,9 +55,7 @@ void Game::Update()
 {
 	Scene::Update();
 
-	if (GetAsyncKeyState(VK_RETURN)) {
-		Game::Uninit();
-		Game::Init();
-		//Manager::SetScene<Result>();
+	if (GetAsyncKeyState(VK_F1)) {
+		Manager::SetScene<Result>();
 	}
 }
