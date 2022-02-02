@@ -15,7 +15,7 @@ private:
 	Audio* se1;
 	Audio* se2;
 
-	static class Polygon2D* poly[];
+	static class Polygon2D* poly;
 
 	int hold = 0;
 

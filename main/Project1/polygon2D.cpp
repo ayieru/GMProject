@@ -89,8 +89,10 @@ void Polygon2D::Draw()
 	Renderer::GetDeviceContext()->Draw(4, 0); //’¸“_”
 }
 
-void Polygon2D::SetTextrue(const char* Filename, float x, float y)
+void Polygon2D::SetTextrue(const char* Filename, float x, float y,int Id)
 {
+	textureId = Id;
+
 	D3DXIMAGE_INFO info;
 	D3DXGetImageInfoFromFile(Filename, &info);
 	float w = (float)info.Width;
@@ -132,4 +134,12 @@ void Polygon2D::SetTextrue(const char* Filename, float x, float y)
 		&Texture,
 		NULL);
 	assert(Texture);
+}
+
+void Polygon2D::DestoryTexture(int Id)
+{
+	Manager::GetScene()->GetGameObjects<Polygon2D>()
+	if (textureId == Id) {
+		SetDestroy();
+	}
 }
