@@ -11,13 +11,17 @@ private:
     ID3D11PixelShader* PixelShader = NULL;
     ID3D11InputLayout* VertexLayout = NULL;
 
-    int num = 4;
+    int score = 0;
+
+    int num = 0;
 
 public:
     void Init();
     void Uninit();
     void Update();
     void Draw();
+
+    void RecScore(int num) { score += num; };
     void Load();
     void UnLoad();
 };

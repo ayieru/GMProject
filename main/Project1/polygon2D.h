@@ -10,13 +10,17 @@ private:
 	ID3D11PixelShader*        PixelShader;
 	ID3D11InputLayout*        VertexLayout;
 
+	int textureId;
+
 public:
 
     void Init();
     void Uninit();
-    void Update();
+	void Update() {};
 	void Draw();
 
-	void SetTextrue(const char* Filename, float x, float y);
-
+	void SetTextrue(const char* Filename, float x, float y,int Id);
+	void SetTextrue(const char* Filename, float x, float y, int tcx, int tcy, int tcw, int tch, int Id);
+	
+	void DestoryTexture(int Id);
 };

@@ -1,2 +1,8 @@
-﻿  boss.cpp
+﻿  UI.cpp
+  game.cpp
+  polygon2D.cpp
+  result.cpp
+  score.cpp
+  title.cpp
+  コードを生成中...
   Project1.vcxproj -> F:\GMProject\main\Debug\Project1.exe

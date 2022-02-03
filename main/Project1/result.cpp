@@ -10,13 +10,8 @@
 
 void Result::Init()
 {
-	//Polygon2D* title;
-	//title->Load("Asset\\Texture\\ê}2.png");
-	AddGameObject<Polygon2D>(2);
-
-	Audio* bgm = AddGameObject<Audio>(2);
-	bgm->Load("Asset\\Audio\\01.wav");
-
+	Polygon2D* poly = AddGameObject<Polygon2D>(2);
+	poly->SetTextrue("Asset\\Texture\\score0.png", 100.f, 100.f, 0);
 }
 
 void Result::Uninit()
@@ -27,7 +22,7 @@ void Result::Uninit()
 void Result::Update()
 {
 	Scene::Update();
-	if (GetAsyncKeyState(VK_S)) {
+	if (GetAsyncKeyState(VK_BACK)) {
 		Manager::SetScene<Title>();
 	}
 }

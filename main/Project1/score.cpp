@@ -73,7 +73,7 @@ void Score::Uninit()
 
 void Score::Update()
 {
-	//num++;
+	num++;
 }
 
 void Score::Draw()

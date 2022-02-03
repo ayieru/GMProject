@@ -57,5 +57,6 @@ public:
 
 	void PlaySE(SE num);
 	void PlayBGM(BGM num);
+	void StopBGM(BGM num);
 };
 

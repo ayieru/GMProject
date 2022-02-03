@@ -8,31 +8,34 @@
 #include "polygon2D.h"
 #include "title.h"
 #include "game.h"
+#include "result.h"
 
-Polygon2D* Title::poly[10];
+Polygon2D* Title::poly;
 
 void Title::Init()
 {
-	poly[0] = AddGameObject<Polygon2D>(2);
-	poly[0]->SetTextrue("Asset\\Texture\\title1.png",0.f,0.f);
-
-	poly[1] = AddGameObject<Polygon2D>(2);
-	poly[1]->SetTextrue("Asset\\Texture\\cursor.png", SCREEN_WIDTH*2/7, SCREEN_HEIGHT*3.2/9);
-
-	poly[2] = AddGameObject<Polygon2D>(2);
-	poly[2]->SetTextrue("Asset\\Texture\\start0.png", SCREEN_WIDTH * 4 / 10, SCREEN_HEIGHT / 3);
+	poly = AddGameObject<Polygon2D>(2);
+	poly->SetTextrue("Asset\\Texture\\title1.png", 0.f, 0.f, 0);
+	poly = AddGameObject<Polygon2D>(2);
+	poly->SetTextrue("Asset\\Texture\\cursor.png", SCREEN_WIDTH * 2 / 7, SCREEN_HEIGHT * 3.2 / 9, 1);
+	poly = AddGameObject<Polygon2D>(2);
+	poly->SetTextrue("Asset\\Texture\\start0.png", SCREEN_WIDTH * 4 / 10, SCREEN_HEIGHT / 3, 2);
+	poly = AddGameObject<Polygon2D>(2);
+	poly->SetTextrue("Asset\\Texture\\tutorial0.png", SCREEN_WIDTH * 4 / 10, SCREEN_HEIGHT / 2, 3);
+	poly = AddGameObject<Polygon2D>(2);
+	poly->SetTextrue("Asset\\Texture\\score0.png", SCREEN_WIDTH * 4 / 10, SCREEN_HEIGHT * 2 / 3, 4);
 	
-	t = type::Game;
-
 	se1 = Manager::GetScene()->AddGameObject<Audio>(2);
 	se2 = Manager::GetScene()->AddGameObject<Audio>(2);
 
-	Audio* bgm = AddGameObject<Audio>(2);
+	bgm = AddGameObject<Audio>(2);
 	bgm->PlayBGM(BGM::main);
+	SetGame();
 }
 
 void Title::Uninit()
 {
+	bgm->StopBGM(BGM::main);
 	Scene::Uninit();
 }
 
@@ -47,8 +50,10 @@ void Title::Update()
 			case type::Game:
 				break;
 			case type::Score:
+				SetTutorial();
 				break;
 			case type::Tutorial:
+				SetGame();
 				break;
 			}
 		}
@@ -58,10 +63,12 @@ void Title::Update()
 			se1->PlaySE(SE::cursor);
 			switch (t) {
 			case type::Game:
+				SetTutorial();
 				break;
 			case type::Score:
 				break;
 			case type::Tutorial:
+				SetScore();
 				break;
 			}
 		}
@@ -78,6 +85,7 @@ void Title::Update()
 			Manager::SetScene<Game>();
 			break;
 		case type::Score:
+			Manager::SetScene<Result>();
 			break;
 		case type::Tutorial:
 			break;
@@ -87,18 +95,55 @@ void Title::Update()
 
 void Title::SetGame()
 {
-	se1->PlaySE(SE::cursor);
 	t = type::Game;
+
+	poly->DestoryTexture(1);
+	poly = AddGameObject<Polygon2D>(2);
+	poly->SetTextrue("Asset\\Texture\\cursor.png", SCREEN_WIDTH * 2 / 7, SCREEN_HEIGHT * 3.2 / 9, 1);
+
+	poly->DestoryTexture(2);
+	poly = AddGameObject<Polygon2D>(2);
+	poly->SetTextrue("Asset\\Texture\\start1.png", SCREEN_WIDTH * 4 / 10, SCREEN_HEIGHT / 3, 2);
+
+	poly->DestoryTexture(3);
+	poly = AddGameObject<Polygon2D>(2);
+	poly->SetTextrue("Asset\\Texture\\tutorial0.png", SCREEN_WIDTH * 4 / 10, SCREEN_HEIGHT / 2, 3);
 }
 
 void Title::SetTutorial()
 {
-	se1->PlaySE(SE::cursor);
 	t = type::Tutorial;
+
+	poly->DestoryTexture(1);
+	poly = AddGameObject<Polygon2D>(2);
+	poly->SetTextrue("Asset\\Texture\\cursor.png", SCREEN_WIDTH * 2 / 7, SCREEN_HEIGHT / 2, 1);
+
+	poly->DestoryTexture(2);
+	poly = AddGameObject<Polygon2D>(2);
+	poly->SetTextrue("Asset\\Texture\\start0.png", SCREEN_WIDTH * 4 / 10, SCREEN_HEIGHT / 3, 2);
+
+	poly->DestoryTexture(3);
+	poly = AddGameObject<Polygon2D>(2);
+	poly->SetTextrue("Asset\\Texture\\tutorial1.png", SCREEN_WIDTH * 4 / 10, SCREEN_HEIGHT / 2, 3);
+
+	poly->DestoryTexture(4);
+	poly = AddGameObject<Polygon2D>(2);
+	poly->SetTextrue("Asset\\Texture\\score0.png", SCREEN_WIDTH * 4 / 10, SCREEN_HEIGHT * 2 / 3, 4);
 }
 
 void Title::SetScore()
 {
-	se1->PlaySE(SE::cursor);
 	t = type::Score;
+
+	poly->DestoryTexture(1);
+	poly = AddGameObject<Polygon2D>(2);
+	poly->SetTextrue("Asset\\Texture\\cursor.png", SCREEN_WIDTH * 2 / 7, SCREEN_HEIGHT * 2 / 3, 1);
+
+	poly->DestoryTexture(3);
+	poly = AddGameObject<Polygon2D>(2);
+	poly->SetTextrue("Asset\\Texture\\tutorial0.png", SCREEN_WIDTH * 4 / 10, SCREEN_HEIGHT / 2, 3);
+
+	poly->DestoryTexture(4);
+	poly = AddGameObject<Polygon2D>(2);
+	poly->SetTextrue("Asset\\Texture\\score1.png", SCREEN_WIDTH * 4 / 10, SCREEN_HEIGHT * 2 / 3, 4);
 }
