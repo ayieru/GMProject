@@ -1,8 +1,11 @@
 ﻿  UI.cpp
   game.cpp
   polygon2D.cpp
+F:\GMProject\main\Project1\polygon2D.cpp(193,45): error C2664: 'HRESULT D3DXGetImageInfoFromFileA(LPCSTR,D3DXIMAGE_INFO *)': 引数 1 を 'ID3D11ShaderResourceView *' から 'LPCSTR' へ変換できません。
+F:\GMProject\main\Project1\polygon2D.cpp(193,30): message : 指示された型は関連がありません。変換には reinterpret_cast、C スタイル キャストまたは関数スタイルのキャストが必要です。
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include\d3dx9tex.h(283,5): message : 'D3DXGetImageInfoFromFileA' の宣言を確認してください
+F:\GMProject\main\Project1\polygon2D.cpp(236,5): error C2065: 'Filename': 定義されていない識別子です。
   result.cpp
   score.cpp
   title.cpp
   コードを生成中...
-  Project1.vcxproj -> F:\GMProject\main\Debug\Project1.exe
