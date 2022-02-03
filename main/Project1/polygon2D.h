@@ -16,9 +16,11 @@ public:
 
     void Init();
     void Uninit();
-    void Update();
+	void Update() {};
 	void Draw();
 
 	void SetTextrue(const char* Filename, float x, float y,int Id);
+	void SetTextrue(const char* Filename, float x, float y, int tcx, int tcy, int tcw, int tch, int Id);
+	
 	void DestoryTexture(int Id);
 };

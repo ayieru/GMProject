@@ -12,6 +12,7 @@ class Title :public Scene
 {
 private:
 	type t;
+	Audio* bgm;
 	Audio* se1;
 	Audio* se2;
 

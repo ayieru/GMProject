@@ -173,4 +173,8 @@ void Audio::PlayBGM(BGM num)
 	bgm[(unsigned int)num]->Play(bgmdata[(unsigned int)num].Loop);
 }
 
+void Audio::StopBGM(BGM num)
+{
+	bgm[(unsigned int)num]->m_SourceVoice->Stop();
+}
 

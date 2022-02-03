@@ -28,14 +28,14 @@ void Title::Init()
 	se1 = Manager::GetScene()->AddGameObject<Audio>(2);
 	se2 = Manager::GetScene()->AddGameObject<Audio>(2);
 
-	Audio* bgm = AddGameObject<Audio>(2);
+	bgm = AddGameObject<Audio>(2);
 	bgm->PlayBGM(BGM::main);
-
 	SetGame();
 }
 
 void Title::Uninit()
 {
+	bgm->StopBGM(BGM::main);
 	Scene::Uninit();
 }
 

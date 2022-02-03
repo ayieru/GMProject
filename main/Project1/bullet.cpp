@@ -60,7 +60,7 @@ void Bullet::Update()
 				if ((enemy->GetMode() != BWMode::eblack && Mode != BWMode::pwhite) ||
 					(enemy->GetMode() != BWMode::ewhite && Mode != BWMode::pblack)) {
 					enemy->SetDestroy();
-					Audio* se = Manager::GetScene()->AddGameObject<Audio>(2);
+					Audio* se = scene->AddGameObject<Audio>(2);
 					se->PlaySE(SE::hit);
 					SetDestroy();
 					scene->AddGameObject<Explosion>(1)->SetPosition(enemyPosition);
@@ -84,6 +84,8 @@ void Bullet::Update()
 				for (Bullet* bullet : bulletlist) {
 					bullet->SetDestroy();
 				}
+				Audio* se = scene->AddGameObject<Audio>(2);
+				se->PlaySE(SE::ex);
 				SetDestroy();
 				scene->AddGameObject<Explosion>(1)->SetPosition(player->GetPosition() + D3DXVECTOR3(0.0f, 0.5f, 0.0f));
 				scene->GetGameObject<UI>(2)->UseLife();
