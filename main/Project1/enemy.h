@@ -9,8 +9,6 @@ class Model;
 class Enemy : public GameObject
 {
 private:
-    //std::list<Model*> static enemy;
-
     ID3D11VertexShader* VertexShader = NULL;
     ID3D11PixelShader* PixelShader = NULL;
     ID3D11InputLayout* VertexLayout = NULL;
