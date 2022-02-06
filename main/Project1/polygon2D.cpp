@@ -5,9 +5,6 @@
 
 #include "polygon2D.h"
 
-
-
-
 void Polygon2D::Init()
 {
 	VERTEX_3D vertex[4];
@@ -45,7 +42,6 @@ void Polygon2D::Init()
 	Renderer::GetDevice()->CreateBuffer(&bd, &sd, &VertexBuffer);
 
 	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "unlitTextureVS.cso");
-
 	Renderer::CreatePixelShader(&PixelShader, "unlitTexturePS.cso");
 }
 
@@ -93,7 +89,6 @@ void Polygon2D::SetTextrue(const char* Filename, float x, float y,int Id)
 	w = (float)info.Width;
 	h = (float)info.Height;
 
-	//頂点データ書き換え
 	D3D11_MAPPED_SUBRESOURCE msr;
 	Renderer::GetDeviceContext()->Map(VertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
 
@@ -137,8 +132,8 @@ void Polygon2D::SetTextrue(const char* Filename, float x, float y, int tcx, int 
 
 	D3DXIMAGE_INFO info;
 	D3DXGetImageInfoFromFile(Filename, &info);
-	float w = (float)info.Width;
-	float h = (float)info.Height;
+	w = (float)info.Width;
+	h = (float)info.Height;
 
 	float u0 = (float)tcx / w;
 	float v0 = (float)tcy / h;
@@ -191,8 +186,8 @@ void Polygon2D::SetTextrue(float x, float y, int Id)
 		if (Id == p->textureId && p->Texture != nullptr) {
 
 			D3D11_MAPPED_SUBRESOURCE msr;
-			Renderer::GetDeviceContext()->Map(VertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
-
+			Renderer::GetDeviceContext()->Map(p->VertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
+			
 			VERTEX_3D* vertex = (VERTEX_3D*)msr.pData;
 			{
 				vertex[0].Position = D3DXVECTOR3(x, y, 0.0f);
@@ -215,7 +210,7 @@ void Polygon2D::SetTextrue(float x, float y, int Id)
 				vertex[3].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
 				vertex[3].TexCoord = D3DXVECTOR2(1.f, 1.f);
 			}
-			Renderer::GetDeviceContext()->Unmap(VertexBuffer, 0);
+			Renderer::GetDeviceContext()->Unmap(p->VertexBuffer, 0);
 		}
 	}
 }
@@ -225,14 +220,41 @@ void Polygon2D::SetTextrue(float x, float y, int tcx, int tcy, int tcw, int tch,
 	Scene* scene = Manager::GetScene();
 	std::vector<Polygon2D*> list = scene->GetGameObjects<Polygon2D>(2);
 	for (Polygon2D* p : list) {
-		if (Id == p->textureId) {
-			D3DX11CreateShaderResourceViewFromFile(Renderer::GetDevice(),
-				Filename,
-				NULL,
-				NULL,
-				&p->Texture,
-				NULL);
-			assert(p->Texture);
+		if (Id == p->textureId && p->Texture != nullptr) {
+
+ 			float u0 = (float)tcx / w;
+			float v0 = (float)tcy / h;
+			float u1 = (float)(tcx + tcw) / w;
+			float v1 = (float)(tcy + tch) / h;
+
+			D3D11_MAPPED_SUBRESOURCE msr;
+			Renderer::GetDeviceContext()->Map(p->VertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
+
+			VERTEX_3D* vertex = (VERTEX_3D*)msr.pData;
+			{
+				vertex[0].Position = D3DXVECTOR3(x, y, 0.0f);
+				vertex[0].Normal = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+				vertex[0].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
+				vertex[0].TexCoord = D3DXVECTOR2(u0, v0);
+
+				vertex[1].Position = D3DXVECTOR3(x + tcw, y, 0.0f);
+				vertex[1].Normal = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+				vertex[1].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
+				vertex[1].TexCoord = D3DXVECTOR2(u1, v0);
+
+				vertex[2].Position = D3DXVECTOR3(x, y + tch, 0.0f);
+				vertex[2].Normal = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+				vertex[2].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
+				vertex[2].TexCoord = D3DXVECTOR2(u0, v1);
+
+				vertex[3].Position = D3DXVECTOR3(x + tcw, y + tch, 0.0f);
+				vertex[3].Normal = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+				vertex[3].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
+				vertex[3].TexCoord = D3DXVECTOR2(u1, v1);
+			}
+
+			Renderer::GetDeviceContext()->Unmap(p->VertexBuffer, 0);
+			break;
 		}
 	}
 }
