@@ -36,17 +36,12 @@ void Game::Init()
 	AddGameObject<Field>(1);
 	AddGameObject<Spawn>(1);
 	AddGameObject<Player>(1);
-	//AddGameObject<BossEnemy>(1);
-
-	bgm = AddGameObject<Audio>(2);
-	bgm->PlayBGM(BGM::game);
 }
 
 void Game::Uninit()
 {
 	Scene::Uninit();
 
-	bgm->StopBGM(BGM::game);
 	Enemy::UnLoad();
 	Bullet::UnLoad();
 	BossEnemy::UnLoad();
@@ -57,6 +52,6 @@ void Game::Update()
 	Scene::Update();
 
 	if (GetAsyncKeyState(VK_F1)) {
-		Manager::SetScene<Result>();
+		Manager::SetScene<Game>();
 	}
 }

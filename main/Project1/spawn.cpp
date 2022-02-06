@@ -6,57 +6,65 @@
 #include "spawn.h"
 #include "enemy.h"
 #include "game.h"
+#include "boss.h"
+#include "audio.h"
 
 void Spawn::Init()
 {
 	SpawnData = {
-	{60,0.f,20.f,BWMode::eblack},
-	{120,-20.f,20.f ,BWMode::eblack},
-	{320,0.f,20.f ,BWMode::eblack},
-	{320,-20.f,20.f ,BWMode::ewhite},
-	{320,0.f,20.f ,BWMode::ewhite},
-	{320,0.f,20.f ,BWMode::eblack},
-	{700,0.f,20.f ,BWMode::eblack},
-	{720,0.f,20.f ,BWMode::eblack},
-	{740,0.f,20.f ,BWMode::ewhite},
-	{760,0.f,20.f ,BWMode::eblack},
-	{1000,0.f,20.f ,BWMode::eblack},
-	{1000,0.f,20.f ,BWMode::eblack},
-	{1070,0.f,20.f ,BWMode::eblack},
-	{1070,0.f,20.f ,BWMode::eblack},
-	{1070,0.f,20.f ,BWMode::eblack},
-	{1100,0.f,20.f ,BWMode::eblack},
-	{1100,0.f,20.f ,BWMode::eblack},
-	{1100,0.f,20.f ,BWMode::eblack},
-	{1100,-40.f,20.f ,BWMode::eblack},
-	{1100,0.f,20.f ,BWMode::eblack},
-	{1100,0.f,20.f ,BWMode::eblack},
-	{1120,0.f,20.f ,BWMode::eblack},
-	{1210,0.f,20.f ,BWMode::eblack},
-	{1210,0.f,20.f ,BWMode::eblack},
-	{1210,0.f,20.f ,BWMode::eblack},
-	{1210,0.f,20.f ,BWMode::eblack},
-	{1210,0.f,20.f ,BWMode::eblack},
-	{1210,0.f,20.f ,BWMode::eblack},
-	{1210,0.f,20.f ,BWMode::eblack},
-	{1210,0.f,20.f ,BWMode::eblack},
+	{1060,0.f,20.f,BWMode::eblack},
+	{720,-20.f,20.f ,BWMode::eblack},
+	{520,0.f,20.f ,BWMode::eblack},
+	{520,-20.f,20.f ,BWMode::ewhite},
+	{520,0.f,20.f ,BWMode::ewhite},
+	{520,0.f,20.f ,BWMode::eblack},
+	{800,0.f,20.f ,BWMode::eblack},
+	{820,0.f,20.f ,BWMode::eblack},
+	{840,0.f,20.f ,BWMode::ewhite},
+	{860,0.f,20.f ,BWMode::eblack},
+	{1200,0.f,20.f ,BWMode::eblack},
+	{1200,0.f,20.f ,BWMode::eblack},
+	{1270,0.f,20.f ,BWMode::eblack},
+	{1270,0.f,20.f ,BWMode::eblack},
+	{1270,0.f,20.f ,BWMode::eblack},
+	{1400,0.f,20.f ,BWMode::ewhite},
+	{1500,0.f,20.f ,BWMode::ewhite},
+	{1500,0.f,20.f ,BWMode::ewhite},
+	{1500,-40.f,20.f ,BWMode::eblack},
+	{1500,0.f,20.f ,BWMode::eblack},
+	{1500,0.f,20.f ,BWMode::eblack},
+	{1520,0.f,20.f ,BWMode::eblack},
+	{1810,0.f,20.f ,BWMode::eblack},
+	{1810,0.f,20.f ,BWMode::eblack},
+	{2010,0.f,20.f ,BWMode::eblack},
+	{2010,0.f,20.f ,BWMode::eblack},
+	{2010,0.f,20.f ,BWMode::eblack},
+	{2010,0.f,20.f ,BWMode::eblack},
+	{2010,0.f,20.f ,BWMode::eblack},
+	{2010,0.f,40.f ,BWMode::ewhite},
 	};
 
 	SpawnData.sort([this](EnemySpawn a, EnemySpawn b)
 	{return a.spawn_frame < b.spawn_frame; });
+
+	bgm = Manager::GetScene()->AddGameObject<Audio>(2);
+	bgm->PlayBGM(BGM::game);
 }
 
 void Spawn::Uninit()
 {
-
+	bgm->StopBGM(BGM::game);
+	bgm->StopBGM(BGM::boss);
 }
 
 void Spawn::Update()
 {
 	frame++;
 
-	if (frame > 3000) {
-		//Manager::SetScene<Result>();
+	if (frame == 3000) {
+		bgm->StopBGM(BGM::game);
+		bgm->PlayBGM(BGM::boss);
+		Manager::GetScene()->AddGameObject<BossEnemy>(1);
 	}
 
 	for (EnemySpawn &q : SpawnData) {

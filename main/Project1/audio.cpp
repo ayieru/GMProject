@@ -13,6 +13,7 @@ AudioParam Audio::sedata[(unsigned int)SE::SEMAX] = {
 		{"Asset\\Audio\\shot.wav",false},
 		{"Asset\\Audio\\shot2.wav",false}, 
 		{"Asset\\Audio\\hit.wav",false},
+		{"Asset\\Audio\\hit2.wav",false},
 		{"Asset\\Audio\\cursor.wav",false},
 		{"Asset\\Audio\\cursor.wav",false},
 		{"Asset\\Audio\\ex.wav",false},
@@ -21,6 +22,7 @@ AudioParam Audio::sedata[(unsigned int)SE::SEMAX] = {
 AudioParam Audio::bgmdata[(unsigned int)SE::SEMAX] = {
 		{"Asset\\Audio\\main.wav",true},
 		{"Asset\\Audio\\Pseudoscience.wav",true},
+		{"Asset\\Audio\\boss.wav",true},
 };
 
 Audio* Audio::se[(unsigned int)SE::SEMAX];

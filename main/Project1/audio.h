@@ -7,6 +7,7 @@ enum class SE {
 	shot,
 	shot2,
 	hit,
+	hit2,
 	cursor,
 	select,
 	ex,
@@ -16,6 +17,7 @@ enum class SE {
 enum class BGM {
 	main,
 	game,
+	boss,
 	BGMMAX,
 };
 

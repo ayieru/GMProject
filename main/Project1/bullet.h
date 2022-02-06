@@ -9,6 +9,8 @@ private:
     static Model* BulletModel;
     static Model* _BulletModel;
 
+    class Audio* se;
+
     ID3D11VertexShader* VertexShader = nullptr;
     ID3D11PixelShader* PixelShader = nullptr;
     ID3D11InputLayout* VertexLayout = nullptr;

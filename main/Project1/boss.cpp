@@ -8,6 +8,7 @@
 #include "game.h"
 #include "explosion2.h"
 #include "audio.h"
+#include "score.h"
 
 #include <string>
 #include <iostream>
@@ -126,8 +127,10 @@ void BossEnemy::Update()
 			se->PlaySE(SE::ex);
 			en[i] = nullptr;
 			life[i] = -1;
+			scene->GetGameObject<Score>(2)->AddScore(1000);
 			scene->AddGameObject<Explosion2>(1)->SetPosition(Eposition[i]);
 			if (i == 0) {
+				scene->GetGameObject<Score>(2)->AddScore(10000);
 				SetDestroy();
 			}
 		}
@@ -185,7 +188,4 @@ void BossEnemy::Load()
 
 void BossEnemy::UnLoad()
 {
-	//for (int i = 0; i < 5; i++) {
-	//	en[i]->EnemyModel->Unload();
-	//}
 }

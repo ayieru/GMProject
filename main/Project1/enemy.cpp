@@ -8,6 +8,7 @@
 #include "player.h"
 #include "bullet.h"
 #include "game.h"
+#include "score.h"
 
 #include <string>
 #include <iostream>
