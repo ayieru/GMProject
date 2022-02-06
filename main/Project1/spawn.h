@@ -25,6 +25,8 @@ class Spawn :public GameObject
 {
 private:
 
+	class Audio* bgm;
+
 	int frame;
 
 	std::list<EnemySpawn> SpawnData{};

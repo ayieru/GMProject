@@ -129,8 +129,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		switch(wParam)
 		{
 		case VK_ESCAPE:
-			DestroyWindow(hWnd);
-			break;
+			int on_button;
+			on_button = MessageBox(NULL, TEXT("ゲームを終了しますか？"), TEXT("ゲーム終了"), MB_YESNO);
+
+			if (on_button == IDYES) {
+				DestroyWindow(hWnd);
+				break;
+			}
+			else {
+				break;
+			}
+
 		}
 		break;
 

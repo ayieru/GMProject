@@ -1,23 +1,2 @@
-﻿  UI.cpp
-  UI_life.cpp
-  UI_sp.cpp
-  audio.cpp
-  bullet.cpp
-  camera.cpp
-  enemy.cpp
-  explosion.cpp
-  explosion2.cpp
-  field.cpp
-  game.cpp
-  manager.cpp
-  player.cpp
-  polygon2D.cpp
-  result.cpp
-  score.cpp
-  skydoom.cpp
-  spawn.cpp
-  title.cpp
-  white.cpp
-  コードを生成中...
-  boss.cpp
+﻿  boss.cpp
   Project1.vcxproj -> F:\GMProject\main\Debug\Project1.exe
