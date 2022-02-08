@@ -58,7 +58,6 @@ void Explosion::Init()
 	Position = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	Rotation = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	Scale = D3DXVECTOR3(2.0f, 2.0f, 2.0f);
-
 }
 
 void Explosion::Uninit()

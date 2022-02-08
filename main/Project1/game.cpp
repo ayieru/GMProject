@@ -23,6 +23,8 @@
 #include "spawn.h"
 #include "boss.h"
 #include "score.h"
+#include "spawnload.h"
+
 
 
 void Game::Init()

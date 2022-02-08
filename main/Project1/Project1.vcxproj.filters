@@ -172,6 +172,9 @@
     <ClInclude Include="score.h">
       <Filter>h</Filter>
     </ClInclude>
+    <ClInclude Include="spawnload.h">
+      <Filter>h</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="common.hlsl">

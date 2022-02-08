@@ -11,6 +11,7 @@
 
 void Spawn::Init()
 {
+	/*
 	SpawnData = {
 	{1060,0.f,20.f,BWMode::eblack},
 	{720,-20.f,20.f ,BWMode::eblack},
@@ -42,9 +43,11 @@ void Spawn::Init()
 	{2010,0.f,20.f ,BWMode::eblack},
 	{2010,0.f,20.f ,BWMode::eblack},
 	{2010,0.f,40.f ,BWMode::ewhite},
-	};
+	};*/
 
-	SpawnData.sort([this](EnemySpawn a, EnemySpawn b)
+	SpawnData = SpawnLoad::LoadData("Asset/data.csv");
+
+	SpawnData.sort([this](SpawnLoad::EnemySpawn a, SpawnLoad::EnemySpawn b)
 	{return a.spawn_frame < b.spawn_frame; });
 
 	bgm = Manager::GetScene()->AddGameObject<Audio>(2);
@@ -67,7 +70,7 @@ void Spawn::Update()
 		Manager::GetScene()->AddGameObject<BossEnemy>(1);
 	}
 
-	for (EnemySpawn &q : SpawnData) {
+	for (SpawnLoad::EnemySpawn&q : SpawnData) {
 		if (frame >= q.spawn_frame) {
 			if (frame == q.spawn_frame) {
 				D3DXVECTOR3 pos = D3DXVECTOR3(q.x, -20.3f, q.y);
