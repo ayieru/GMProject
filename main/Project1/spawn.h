@@ -1,25 +1,10 @@
 #pragma once
+ 
 #include "gameobject.h"
+#include "spawnload.h"
+
 #include <list>
 
-enum class EnemyState {
-	A,
-	B,
-	C,
-	D,
-	E,
-	Boss1,
-	Boss2,
-	Boss3,
-};
-
-struct EnemySpawn
-{
-	int spawn_frame;
-	float x,y;
-	BWMode mode;
-	EnemyState state;
-};
 
 class Spawn :public GameObject
 {
@@ -27,9 +12,9 @@ private:
 
 	class Audio* bgm;
 
-	int frame;
+	float frame;
 
-	std::list<EnemySpawn> SpawnData{};
+	std::list<SpawnLoad::EnemySpawn> SpawnData{};
 
 public:
 	void Init();

@@ -14,7 +14,7 @@ void Manager::Init()
 	Renderer::Init();
 	Audio::InitMaster();
 
-	SetScene<Title>();
+	SetScene<Game>();
 }
 
 void Manager::Uninit()
