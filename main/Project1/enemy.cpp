@@ -25,6 +25,7 @@ void Enemy::Init()
 
 	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "vertexLightingVS.cso");
 	Renderer::CreatePixelShader(&PixelShader, "vertexLightingPS.cso");
+
 }
 
 void Enemy::Uninit()
@@ -71,7 +72,7 @@ void Enemy::Draw()
 	world = s * r * t;
 	Renderer::SetWorldMatrix(&world);
 
-	if (Mode==BWMode::eblack) {
+	if (Mode == BWMode::eblack) {
 		EnemyModel->Draw();
 	}
 	else {
@@ -92,7 +93,7 @@ void Enemy::UnLoad()
 {
 	EnemyModel->Unload();
 	delete EnemyModel;
-
+	
 	_EnemyModel->Unload();
 	delete _EnemyModel;
 }

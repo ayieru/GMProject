@@ -24,14 +24,13 @@
 #include "boss.h"
 #include "score.h"
 #include "spawnload.h"
-
+#include "title.h"
 
 
 void Game::Init()
 {
 	Enemy::Load();
 	Bullet::Load();
-	BossEnemy::Load();
 
 	AddGameObject<Camera>(0);
 	AddGameObject<UI>(2);
@@ -46,7 +45,6 @@ void Game::Uninit()
 
 	Enemy::UnLoad();
 	Bullet::UnLoad();
-	BossEnemy::UnLoad();
 }
 
 void Game::Update()
@@ -54,6 +52,6 @@ void Game::Update()
 	Scene::Update();
 
 	if (GetAsyncKeyState(VK_F1)) {
-		Manager::SetScene<Game>();
+		Manager::SetScene<Title>();
 	}
 }

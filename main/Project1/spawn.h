@@ -1,7 +1,6 @@
 #pragma once
  
 #include "gameobject.h"
-#include "spawnload.h"
 
 #include <list>
 
@@ -14,7 +13,7 @@ private:
 
 	float frame;
 
-	std::list<SpawnLoad::EnemySpawn> SpawnData{};
+	std::list<EnemySpawn> SpawnData{};
 
 public:
 	void Init();

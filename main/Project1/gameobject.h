@@ -13,6 +13,21 @@ enum class BWMode {
     ewhite,
 };
 
+enum class EnemyState {
+    A,
+    B,
+    C,
+    D,
+};
+
+struct EnemySpawn
+{
+    float spawn_frame;
+    float x, y;
+    BWMode mode;
+    EnemyState state;
+};
+
 class GameObject
 {
 protected:
@@ -24,6 +39,7 @@ protected:
     D3DXQUATERNION Quaternion;
 
     BWMode  Mode;
+    EnemyState State;
 
     bool destroy = false;
 
@@ -125,7 +141,9 @@ public:
     void SetPosition(D3DXVECTOR3 sPosition) { Position = sPosition; }
     void SetRotation(D3DXVECTOR3 sRotation) { Rotation = sRotation; }
     void SetScale(D3DXVECTOR3 sScale) { Scale = sScale; }
+    void SetEnemy(D3DXVECTOR3 sPosition) { Position = sPosition; }
     void SetEnemy(D3DXVECTOR3 sPosition, BWMode sMode) { Position = sPosition, Mode = sMode; }
+    void SetEnemy(D3DXVECTOR3 sPosition, BWMode sMode, EnemyState sState) { Position = sPosition, Mode = sMode, State = sState; }
     void SetForward(D3DXVECTOR3 sPosition, D3DXVECTOR3 sForward) { Position = sPosition, Forward = sForward; }
     void SetBullet(D3DXVECTOR3 sPosition, D3DXVECTOR3 sForward, BWMode sMode) { Position = sPosition, D3DXVec3Normalize(&Forward,&sForward), Mode = sMode; }
     void SetDestroy() { destroy = true; }

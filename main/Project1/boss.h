@@ -39,7 +39,4 @@ public:
     Enemy* GetEn(int num) const { return en[num]; }
 
     void UseLife(int num) { life[num]--; }
-
-    static void Load();
-    static void UnLoad();
 };

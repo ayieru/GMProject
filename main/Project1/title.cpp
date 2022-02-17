@@ -78,7 +78,7 @@ void Title::Update()
 		hold = 0;
 	}
 
-	if (GetAsyncKeyState(VK_RETURN) && GetAsyncKeyState(VK_SPACE)) {
+	if (GetAsyncKeyState(VK_RETURN) || GetAsyncKeyState(VK_SPACE)) {
 		se1->PlaySE(SE::cursor);
 		switch (t) {
 		case type::Game:

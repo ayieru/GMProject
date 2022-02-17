@@ -154,7 +154,7 @@ void BossEnemy::Draw()
 	D3DXMatrixTranslation(&t, Position.x, Position.y, Position.z);
 	world = s * r * t;
 	Renderer::SetWorldMatrix(&world);
-	en[0]->EnemyModel->Draw();
+	en[0]->_EnemyModel->Draw();
 
 	for (int i = 1; i < MAXENEMY; i++) {
 		if (en[i] != nullptr) {
@@ -167,25 +167,4 @@ void BossEnemy::Draw()
 			en[i]->EnemyModel->Draw();
 		}
 	}
-}
-
-void BossEnemy::Load()
-{
-	int i = 0;
-
-	for (int j = 0; j < 6; j++) {
-		if (i == 0) {
-			en[j]->EnemyModel = new Model();
-			en[j]->EnemyModel->Load("Asset\\Models\\e_black.obj");
-			i++;
-		}
-		else {
-			en[j]->EnemyModel = new Model();
-			en[j]->EnemyModel->Load("Asset\\Models\\e_white.obj");
-		}
-	}
-}
-
-void BossEnemy::UnLoad()
-{
 }

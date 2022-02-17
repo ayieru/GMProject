@@ -7,33 +7,13 @@
 using namespace std;
 
 
-class SpawnLoad :public GameObject
+class SpawnLoad 
 {
 public:
-	void Init() {};
-	void Uninit() {};
-	void Update() {};
-	void Draw() {};
+	static list<EnemySpawn> LoadData(const char* f) {
 
-	enum class EnemyState { 
-		A,
-		B,
-		C,
-		D,
-	};
-
-	struct EnemySpawn
-	{
-		float spawn_frame;
-		float x, y;
-		BWMode mode;
-		EnemyState state;
-	};
-
-	static list<SpawnLoad::EnemySpawn> SpawnLoad::LoadData(const char* f) {
-
-		vector<SpawnLoad::EnemySpawn> DataTable;
-		list<SpawnLoad::EnemySpawn> PushData;
+		vector<EnemySpawn> DataTable;
+		list<EnemySpawn> PushData;
 
 		ifstream fileStream(f);
 		assert(fileStream);

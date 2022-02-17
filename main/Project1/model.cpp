@@ -34,7 +34,6 @@ void Model::Draw()
 		// ƒ|ƒŠƒSƒ“•`‰æ
 		Renderer::GetDeviceContext()->DrawIndexed( m_SubsetArray[i].IndexNum, m_SubsetArray[i].StartIndex, 0 );
 	}
-
 }
 
 
