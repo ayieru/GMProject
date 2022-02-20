@@ -9,6 +9,7 @@
 #include "bullet.h"
 #include "game.h"
 #include "score.h"
+#include "spawnload.h"
 
 #include <string>
 #include <iostream>
@@ -20,7 +21,7 @@ Model* Enemy::_EnemyModel;
 void Enemy::Init()
 {
 	Position = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	Rotation = D3DXVECTOR3(0.0f, 1.0f, 1.0f);
+	Rotation = D3DXVECTOR3(0.0f, (float)std::_Pi, 0.0f);
 	Scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 
 	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "vertexLightingVS.cso");
@@ -38,21 +39,80 @@ void Enemy::Update()
 {
 	std::random_device rnd;
 	std::mt19937 mt(rnd());
-	std::uniform_int_distribution<> r(1,10);
+	std::uniform_int_distribution<> r(1, 10);
 
-	Rotation.y += r(mt) * 0.01f;
+	Scene* scene = Manager::GetScene();
 
-	if (a != 0) {
-		Manager::GetScene()->AddGameObject<Bullet>(1)->
-			SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), GetForward(),Mode);
+	Rotation.y += 0.01f;
+
+	switch (Estate) {
+	case EnemyState::A:
+			if (a != 0) {
+				scene->AddGameObject<Bullet>(1)->
+					SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), GetForward(), Mode);
+			}
+			a++;
+			if (a > 2) {
+				a = 0;
+			}
+
+			Position.z -= 0.1f;
+
+			break;
+
+	case EnemyState::B:
+		if (a == 0) {
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, -1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(1.0f, 0.0f, 1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-1.0f, 0.0f, 1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(3.0f, 0.0f, 1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-3.0f, 0.0f, 1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-5.0f, 0.0f, -1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(5.0f, 0.0f, -1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-1.0f, 0.0f,-1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(1.0f, 0.0f, -1.0f), Mode);
+
+		}
+		a++;
+		if (a > 60) {
+			a = 0;
+		}
+
+		Position.z -= 0.1f;
+
+		break;
+
+	case EnemyState::C:
+		if (a == 0) {
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, -1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(1.0f, 0.0f, 1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-1.0f, 0.0f, 1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(3.0f, 0.0f, 1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-3.0f, 0.0f, 1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-5.0f, 0.0f, -1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(5.0f, 0.0f, -1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-1.0f, 0.0f, -1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(1.0f, 0.0f, -1.0f), Mode);
+
+		}
+		a++;
+		if (a > 60) {
+			a = 0;
+		}
+
+		if (Position.z > 20.f) {
+			Position.z -= 0.1f;
+		}
+
+		break;
+
+	default:
+		break;
 	}
-	a++;
 
-	if (a > 10) {
-		a = 0;
-	}
 
-	Position.z -= 0.1f;
 }
 
 void Enemy::Draw()
@@ -71,7 +131,7 @@ void Enemy::Draw()
 	world = s * r * t;
 	Renderer::SetWorldMatrix(&world);
 
-	if (Mode==BWMode::eblack) {
+	if (Mode == BWMode::eblack) {
 		EnemyModel->Draw();
 	}
 	else {

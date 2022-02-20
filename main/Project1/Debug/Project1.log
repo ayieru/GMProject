@@ -1,27 +1,2 @@
-﻿  UI.cpp
-  UI_life.cpp
-  UI_sp.cpp
-  audio.cpp
-  bullet.cpp
-  camera.cpp
-  enemy.cpp
-  explosion.cpp
-  explosion2.cpp
-  field.cpp
-  game.cpp
-  manager.cpp
-  model.cpp
-  player.cpp
-  polygon2D.cpp
-  result.cpp
-  score.cpp
-  skydoom.cpp
-  spawn.cpp
-  title.cpp
-  コードを生成中...
-  コンパイル中...
-  white.cpp
-  コードを生成中...
-  boss.cpp
-  LINK : 前回のインクリメンタル リンクで F:\GMProject\main\Debug\Project1.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
+﻿  spawn.cpp
   Project1.vcxproj -> F:\GMProject\main\Debug\Project1.exe
