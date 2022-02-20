@@ -15,12 +15,7 @@ public:
 	void Update() {};
 	void Draw() {};
 
-	enum class EnemyState { 
-		A,
-		B,
-		C,
-		D,
-	};
+
 
 	struct EnemySpawn
 	{
