@@ -14,10 +14,11 @@ enum class BWMode {
 };
 
 enum class EnemyState {
-    A,
-    B,
-    C,
-    D,
+    A, //回転　固定
+    B, //全方向　移動
+    C, //前方向　固定
+    D, //前方向　移動
+    boss,
 };
 
 class GameObject
@@ -49,6 +50,7 @@ public:
     BWMode GetMode() { return Mode; }
     D3DXVECTOR3 GetPosition() { return Position; }
     D3DXVECTOR3 GetRotation() { return Rotation; }
+
     //前方向ベクトル
     D3DXVECTOR3 GetForward() 
     {
@@ -62,6 +64,7 @@ public:
 
         return forward;
     }
+
     //OBBの生成
     D3DXVECTOR3 GetOBBX()
     {

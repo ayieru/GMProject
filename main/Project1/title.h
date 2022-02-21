@@ -18,7 +18,7 @@ private:
 
 	static class Polygon2D* poly;
 
-	int hold = 0;
+	int hold = 1;
 
 	void SetGame();
 	void SetTutorial();

@@ -12,7 +12,7 @@ private:
     static Enemy* en[];
 
     const int MAXENEMY = 5;
-    const int MAXLIFE = 20;
+    const int MAXLIFE = 12;
 
     ID3D11VertexShader* VertexShader = NULL;
     ID3D11PixelShader* PixelShader = NULL;
@@ -24,6 +24,7 @@ private:
     float fsin = 0.f;
     float fcos = 0.f;
     int a = 0;
+    int ss = 0;
     int* life = new int[MAXENEMY];
     bool re = false;
     bool A = false;

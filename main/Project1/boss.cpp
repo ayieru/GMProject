@@ -9,6 +9,7 @@
 #include "explosion2.h"
 #include "audio.h"
 #include "score.h"
+#include "result.h"
 
 #include <string>
 #include <iostream>
@@ -31,12 +32,19 @@ void BossEnemy::Init()
 
 	for (int i = 0; i < MAXENEMY; i++) {
 		en[i] = new Enemy();
-		life[i] = MAXLIFE;
+		life[i] = MAXLIFE * (MAXENEMY - i);
 	}
-	life[0] = MAXLIFE * 2;
 
 	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "vertexLightingVS.cso");
 	Renderer::CreatePixelShader(&PixelShader, "vertexLightingPS.cso");
+
+	rot = 0.f;
+	fsin = 0.f;
+	fcos = 0.f;
+	a = 0;
+	ss = 0;
+	re = false;
+	A = false;
 }
 
 void BossEnemy::Uninit()
@@ -74,7 +82,7 @@ void BossEnemy::Update()
 	if (en[0] != nullptr) {
 		en[0]->SetRotation(Rotation);
 		en[0]->SetScale(Scale);
-		en[0]->SetEnemy(Position, BWMode::eblack);
+		en[0]->SetEnemy(Position, BWMode::ewhite);
 	}
 	if (en[1] != nullptr) {
 		Eposition[1] = Position + D3DXVECTOR3(fcos, 0.f, fsin);
@@ -108,30 +116,41 @@ void BossEnemy::Update()
 	//’e
 	if (a % 2 == 1) {
 		scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), GetForward(), BWMode::ewhite);
+		if (ss >= 2) {
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), -GetForward(), BWMode::ewhite);
+		}
 	}
 	if (a == 0) {
 		scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, -1.f), Mode);
-		scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.2f, 0.0f, -1.f), Mode);
-		scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-0.2f, 0.0f, -1.f), Mode);
 		scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.4f, 0.0f, -1.f), Mode);
 		scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-0.4f, 0.0f, -1.f), Mode);
+		if (ss >= 4) {
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.2f, 0.0f, -1.f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-0.2f, 0.0f, -1.f), Mode);
+		}
 	}
+
+
 	a++;
 	if (a > 20) {
 		a = 0;
 	}
 
+	//Ž€–S”»’è
 	for (int i = 0; i < MAXENEMY; i++) {
 		if (life[i] == 0 ) {
 			Audio* se = Manager::GetScene()->AddGameObject<Audio>(2);
 			se->PlaySE(SE::ex);
 			en[i] = nullptr;
 			life[i] = -1;
+			ss++;
+
 			scene->GetGameObject<Score>(2)->AddScore(1000);
 			scene->AddGameObject<Explosion2>(1)->SetPosition(Eposition[i]);
 			if (i == 0) {
 				scene->GetGameObject<Score>(2)->AddScore(10000);
 				SetDestroy();
+				Game::GameEnd();
 			}
 		}
 	}
@@ -154,7 +173,7 @@ void BossEnemy::Draw()
 	D3DXMatrixTranslation(&t, Position.x, Position.y, Position.z);
 	world = s * r * t;
 	Renderer::SetWorldMatrix(&world);
-	en[0]->EnemyModel->Draw();
+	en[0]->_EnemyModel->Draw();
 
 	for (int i = 1; i < MAXENEMY; i++) {
 		if (en[i] != nullptr) {
@@ -171,19 +190,6 @@ void BossEnemy::Draw()
 
 void BossEnemy::Load()
 {
-	int i = 0;
-
-	for (int j = 0; j < 6; j++) {
-		if (i == 0) {
-			en[j]->EnemyModel = new Model();
-			en[j]->EnemyModel->Load("Asset\\Models\\e_black.obj");
-			i++;
-		}
-		else {
-			en[j]->EnemyModel = new Model();
-			en[j]->EnemyModel->Load("Asset\\Models\\e_white.obj");
-		}
-	}
 }
 
 void BossEnemy::UnLoad()

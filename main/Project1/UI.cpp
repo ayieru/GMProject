@@ -12,6 +12,9 @@
 #include "camera.h"
 #include "game.h"
 
+int UI::_life = 0;
+int UI::_special = 0;
+
 void UI::Init()
 {
 	VERTEX_3D vertex[4];
@@ -66,9 +69,9 @@ void UI::Init()
 	Rotation = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	Scale = D3DXVECTOR3(1.3f, 1.35f, 1.0f);
 
-	_life = 2;
-	f_life = 0;
+	_life = 3;
 	_special = 3;
+	f_life = 0;
 	f_special = 0;
 }
 
@@ -84,10 +87,6 @@ void UI::Uninit()
 void UI::Update()
 {
 	Scene* scene = Manager::GetScene();
-
-	if (_life == -1) {
-		//Manager::SetScene<Result>();
-	}
 
 	//çXêV
 	if (_life != f_life) {
@@ -112,14 +111,8 @@ void UI::Update()
 		f_special = _special;
 	}
 
-	if (GetAsyncKeyState(VK_UP) && _life < 4) {
-		_life++;
-		_special++;
-	}
-
-	if (GetAsyncKeyState(VK_DOWN) && _life > 1) {
-		_life--;
-		_special--;
+	if (_life == -1) {
+		Game::GameEnd();
 	}
 }
 

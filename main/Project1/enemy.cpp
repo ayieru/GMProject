@@ -43,20 +43,21 @@ void Enemy::Update()
 
 	Scene* scene = Manager::GetScene();
 
-	Rotation.y += 0.01f;
+	Rotation.y += 0.02f;
 
 	switch (Estate) {
 	case EnemyState::A:
 			if (a != 0) {
-				scene->AddGameObject<Bullet>(1)->
-					SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), GetForward(), Mode);
+				scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), GetForward(), Mode);
 			}
 			a++;
 			if (a > 2) {
 				a = 0;
 			}
 
-			Position.z -= 0.1f;
+			if (Position.z > 18.f) {
+				Position.z -= 0.1f;
+			}
 
 			break;
 
@@ -72,7 +73,6 @@ void Enemy::Update()
 			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(5.0f, 0.0f, -1.0f), Mode);
 			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-1.0f, 0.0f,-1.0f), Mode);
 			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(1.0f, 0.0f, -1.0f), Mode);
-
 		}
 		a++;
 		if (a > 60) {
@@ -86,33 +86,37 @@ void Enemy::Update()
 	case EnemyState::C:
 		if (a == 0) {
 			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, -1.0f), Mode);
-			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 1.0f), Mode);
-			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(1.0f, 0.0f, 1.0f), Mode);
-			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-1.0f, 0.0f, 1.0f), Mode);
-			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(3.0f, 0.0f, 1.0f), Mode);
-			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-3.0f, 0.0f, 1.0f), Mode);
-			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-5.0f, 0.0f, -1.0f), Mode);
-			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(5.0f, 0.0f, -1.0f), Mode);
-			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-1.0f, 0.0f, -1.0f), Mode);
-			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(1.0f, 0.0f, -1.0f), Mode);
-
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-2.0f, 0.0f, -1.0f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(2.0f, 0.0f, -1.0f), Mode);
 		}
 		a++;
 		if (a > 60) {
 			a = 0;
 		}
 
-		if (Position.z > 20.f) {
+		if (Position.z > 18.f) {
 			Position.z -= 0.1f;
 		}
 
 		break;
 
-	default:
+	case EnemyState::D:
+		if (a == 0) {
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, -1.f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.2f, 0.0f, -1.f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-0.2f, 0.0f, -1.f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.4f, 0.0f, -1.f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-0.4f, 0.0f, -1.f), Mode);
+		}
+		a++;
+		if (a > 60) {
+			a = 0;
+		}
+
+		Position.z -= 0.1f;
+
 		break;
 	}
-
-
 }
 
 void Enemy::Draw()

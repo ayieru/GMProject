@@ -13,9 +13,9 @@ private:
 
     int a = 0;
 
-    int _life = 0;
+    static int _life;
     int f_life = 0;
-    int _special = 0;
+    static int _special;
     int f_special = 0;
 
 public:
@@ -27,6 +27,6 @@ public:
     void UseSpecial() { _special--; }
     void UseLife() { _life--; }
 
-    int GetLife() { return _life; }
-    int GetSpecial() { return _special; }
+    static int GetLife() { return _life; }
+    static int GetSpecial() { return _special; }
 };

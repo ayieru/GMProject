@@ -107,6 +107,8 @@ void Player::Update()
 					life->SetDestroy();
 				}
 				scene->GetGameObject<UI>(2)->UseSpecial();
+				Audio* se = Manager::GetScene()->AddGameObject<Audio>(2);
+				se->PlaySE(SE::sp);
 				intervaltime++;
 			}
 		}

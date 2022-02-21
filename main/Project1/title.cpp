@@ -9,6 +9,7 @@
 #include "title.h"
 #include "game.h"
 #include "result.h"
+#include "tutorial.h"
 
 Polygon2D* Title::poly;
 
@@ -31,6 +32,8 @@ void Title::Init()
 	bgm = AddGameObject<Audio>(2);
 	bgm->PlayBGM(BGM::main);
 	SetGame();
+
+	hold = 1;
 }
 
 void Title::Uninit()
@@ -41,6 +44,14 @@ void Title::Uninit()
 
 void Title::Update()
 {
+	if (GetAsyncKeyState(VK_ESCAPE)) {
+		int on_button;
+		on_button = MessageBox(NULL, TEXT("ゲームを終了しますか？"), TEXT("ゲーム終了"), MB_YESNO);
+		if (on_button == IDYES) {
+			DestroyWindow(GetWindow());
+		}
+	}
+
 	Scene::Update();
 
 	if (GetAsyncKeyState(VK_UP) || GetAsyncKeyState(VK_W)) {
@@ -73,23 +84,24 @@ void Title::Update()
 			}
 		}
 		hold++;
+	}else if (GetAsyncKeyState(VK_RETURN) || GetAsyncKeyState(VK_SPACE)) {
+		if (hold == 0) {
+			se1->PlaySE(SE::cursor);
+			switch (t) {
+			case type::Game:
+				Manager::SetScene<Game>();
+				break;
+			case type::Score:
+				Manager::SetScene<Result>();
+				break;
+			case type::Tutorial:
+				Manager::SetScene<Tutorial>();
+				break;
+			}
+		}
 	}
 	else {
 		hold = 0;
-	}
-
-	if (GetAsyncKeyState(VK_RETURN) || GetAsyncKeyState(VK_SPACE)) {
-		se1->PlaySE(SE::cursor);
-		switch (t) {
-		case type::Game:
-			Manager::SetScene<Game>();
-			break;
-		case type::Score:
-			Manager::SetScene<Result>();
-			break;
-		case type::Tutorial:
-			break;
-		}
 	}
 }
 

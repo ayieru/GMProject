@@ -17,6 +17,8 @@ AudioParam Audio::sedata[(unsigned int)SE::SEMAX] = {
 		{"Asset\\Audio\\cursor.wav",false},
 		{"Asset\\Audio\\cursor.wav",false},
 		{"Asset\\Audio\\ex.wav",false},
+		{"Asset\\Audio\\sp.wav",false},
+		{"Asset\\Audio\\in.wav",false},
 };
 
 AudioParam Audio::bgmdata[(unsigned int)SE::SEMAX] = {
