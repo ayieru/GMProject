@@ -26,7 +26,7 @@
 #include "title.h"
 #include "spawnload.h"
 
-
+bool Game::end = false;
 
 void Game::Init()
 {
@@ -39,6 +39,8 @@ void Game::Init()
 	AddGameObject<Field>(1);
 	AddGameObject<Spawn>(1);
 	AddGameObject<Player>(1);
+
+	end = false;
 }
 
 void Game::Uninit()
@@ -65,4 +67,11 @@ void Game::Update()
 			Manager::SetScene<Title>();
 		}
 	}
+
+	if(end) Manager::SetScene<Result>();
+}
+
+void Game::GameEnd()
+{
+	end = true;
 }

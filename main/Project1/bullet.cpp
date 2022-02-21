@@ -94,6 +94,11 @@ void Bullet::Update()
 				scene->GetGameObject<UI>(2)->UseLife();
 			}
 		}
+		else if (PlayerOBB()) {
+			scene->GetGameObject<Score>(2)->AddScore(20);
+			SetDestroy();
+			se->PlaySE(SE::in);
+		}
 	}
 
 	//ƒ{ƒX“–‚½‚è”»’è

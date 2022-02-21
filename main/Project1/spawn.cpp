@@ -30,15 +30,15 @@ void Spawn::Update()
 {
 	frame++;
 
-	if (frame == 3000) {
-		bgm->StopBGM(BGM::game);
-		bgm->PlayBGM(BGM::boss);
-		Manager::GetScene()->AddGameObject<BossEnemy>(1);
-	}
-
 	for (SpawnLoad::EnemySpawn&q : SpawnData) {
 		if (frame >= q.spawn_frame) {
 			if (frame == q.spawn_frame) {
+				if (q.state == EnemyState::boss) {
+					bgm->StopBGM(BGM::game);
+					bgm->PlayBGM(BGM::boss);
+					Manager::GetScene()->AddGameObject<BossEnemy>(1);
+					break;
+				}
 				D3DXVECTOR3 pos = D3DXVECTOR3(q.x, -20.3f, q.y);
 				Manager::GetScene()->AddGameObject<Enemy>(1)->SetEnemy(pos, q.mode,q.state);
 			}
@@ -48,5 +48,3 @@ void Spawn::Update()
 		}
 	}
 }
-
-void Spawn::Draw(){}

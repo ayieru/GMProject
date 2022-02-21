@@ -43,7 +43,7 @@ void Enemy::Update()
 
 	Scene* scene = Manager::GetScene();
 
-	Rotation.y += r(mt)* 0.01f;
+	Rotation.y += 0.02f;
 
 	switch (Estate) {
 	case EnemyState::A:
@@ -55,7 +55,9 @@ void Enemy::Update()
 				a = 0;
 			}
 
-			Position.z -= 0.1f;
+			if (Position.z > 18.f) {
+				Position.z -= 0.1f;
+			}
 
 			break;
 
@@ -92,7 +94,7 @@ void Enemy::Update()
 			a = 0;
 		}
 
-		if (Position.z > 20.f) {
+		if (Position.z > 18.f) {
 			Position.z -= 0.1f;
 		}
 
@@ -111,9 +113,8 @@ void Enemy::Update()
 			a = 0;
 		}
 
-		if (Position.z > 20.f) {
-			Position.z -= 0.1f;
-		}
+		Position.z -= 0.1f;
+
 		break;
 	}
 }

@@ -11,6 +11,8 @@ enum class SE {
 	cursor,
 	select,
 	ex,
+	sp,
+	in,
 	SEMAX,
 };
 

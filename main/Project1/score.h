@@ -11,7 +11,7 @@ private:
 
     static class Polygon2D* poly;
 
-    int score = 0;
+    static int score;
 
     int num = 0;
     int count = 0;
@@ -24,6 +24,8 @@ public:
     void Draw() {};
 
     void AddScore(int num) { score += num; };
+    static int GetScore() { return score; };
+
     void Load();
     void UnLoad();
 };

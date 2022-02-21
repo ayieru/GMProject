@@ -9,6 +9,7 @@
 #include "explosion2.h"
 #include "audio.h"
 #include "score.h"
+#include "result.h"
 
 #include <string>
 #include <iostream>
@@ -36,6 +37,14 @@ void BossEnemy::Init()
 
 	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "vertexLightingVS.cso");
 	Renderer::CreatePixelShader(&PixelShader, "vertexLightingPS.cso");
+
+	rot = 0.f;
+	fsin = 0.f;
+	fcos = 0.f;
+	a = 0;
+	ss = 0;
+	re = false;
+	A = false;
 }
 
 void BossEnemy::Uninit()
@@ -107,14 +116,21 @@ void BossEnemy::Update()
 	//’e
 	if (a % 2 == 1) {
 		scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), GetForward(), BWMode::ewhite);
+		if (ss >= 2) {
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), -GetForward(), BWMode::ewhite);
+		}
 	}
 	if (a == 0) {
 		scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, -1.f), Mode);
-		scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.2f, 0.0f, -1.f), Mode);
-		scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-0.2f, 0.0f, -1.f), Mode);
 		scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.4f, 0.0f, -1.f), Mode);
 		scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-0.4f, 0.0f, -1.f), Mode);
+		if (ss >= 4) {
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(0.2f, 0.0f, -1.f), Mode);
+			scene->AddGameObject<Bullet>(1)->SetBullet(Position + D3DXVECTOR3(0.0f, -1.0f, 0.0f), D3DXVECTOR3(-0.2f, 0.0f, -1.f), Mode);
+		}
 	}
+
+
 	a++;
 	if (a > 20) {
 		a = 0;
@@ -127,11 +143,14 @@ void BossEnemy::Update()
 			se->PlaySE(SE::ex);
 			en[i] = nullptr;
 			life[i] = -1;
+			ss++;
+
 			scene->GetGameObject<Score>(2)->AddScore(1000);
 			scene->AddGameObject<Explosion2>(1)->SetPosition(Eposition[i]);
 			if (i == 0) {
 				scene->GetGameObject<Score>(2)->AddScore(10000);
 				SetDestroy();
+				Game::GameEnd();
 			}
 		}
 	}

@@ -1,2 +1,12 @@
-﻿  result.cpp
+﻿  audio.cpp
+  bullet.cpp
+  game.cpp
+  manager.cpp
+  player.cpp
+  result.cpp
+  spawn.cpp
+  title.cpp
+  tutorial.cpp
+  コードを生成中...
+  boss.cpp
   Project1.vcxproj -> F:\GMProject\main\Debug\Project1.exe
