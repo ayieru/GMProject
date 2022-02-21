@@ -86,6 +86,9 @@
     <ClCompile Include="score.cpp">
       <Filter>cpp</Filter>
     </ClCompile>
+    <ClCompile Include="tutorial.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="manager.h">
@@ -173,6 +176,9 @@
       <Filter>h</Filter>
     </ClInclude>
     <ClInclude Include="spawnload.h">
+      <Filter>h</Filter>
+    </ClInclude>
+    <ClInclude Include="tutorial.h">
       <Filter>h</Filter>
     </ClInclude>
   </ItemGroup>

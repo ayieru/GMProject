@@ -64,6 +64,7 @@ public:
 			if (state == "b") data.state = EnemyState::B;
 			if (state == "c") data.state = EnemyState::C;
 			if (state == "d") data.state = EnemyState::D;
+			if (state == "s") data.state = EnemyState::boss;
 			
 			DataTable.push_back(data);
 		}

@@ -31,9 +31,8 @@ void BossEnemy::Init()
 
 	for (int i = 0; i < MAXENEMY; i++) {
 		en[i] = new Enemy();
-		life[i] = MAXLIFE;
+		life[i] = MAXLIFE * (MAXENEMY - i);
 	}
-	life[0] = MAXLIFE * 2;
 
 	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "vertexLightingVS.cso");
 	Renderer::CreatePixelShader(&PixelShader, "vertexLightingPS.cso");
@@ -74,7 +73,7 @@ void BossEnemy::Update()
 	if (en[0] != nullptr) {
 		en[0]->SetRotation(Rotation);
 		en[0]->SetScale(Scale);
-		en[0]->SetEnemy(Position, BWMode::eblack);
+		en[0]->SetEnemy(Position, BWMode::ewhite);
 	}
 	if (en[1] != nullptr) {
 		Eposition[1] = Position + D3DXVECTOR3(fcos, 0.f, fsin);
@@ -121,6 +120,7 @@ void BossEnemy::Update()
 		a = 0;
 	}
 
+	//Ž€–S”»’è
 	for (int i = 0; i < MAXENEMY; i++) {
 		if (life[i] == 0 ) {
 			Audio* se = Manager::GetScene()->AddGameObject<Audio>(2);
@@ -154,7 +154,7 @@ void BossEnemy::Draw()
 	D3DXMatrixTranslation(&t, Position.x, Position.y, Position.z);
 	world = s * r * t;
 	Renderer::SetWorldMatrix(&world);
-	en[0]->EnemyModel->Draw();
+	en[0]->_EnemyModel->Draw();
 
 	for (int i = 1; i < MAXENEMY; i++) {
 		if (en[i] != nullptr) {
@@ -171,19 +171,6 @@ void BossEnemy::Draw()
 
 void BossEnemy::Load()
 {
-	int i = 0;
-
-	for (int j = 0; j < 6; j++) {
-		if (i == 0) {
-			en[j]->EnemyModel = new Model();
-			en[j]->EnemyModel->Load("Asset\\Models\\e_black.obj");
-			i++;
-		}
-		else {
-			en[j]->EnemyModel = new Model();
-			en[j]->EnemyModel->Load("Asset\\Models\\e_white.obj");
-		}
-	}
 }
 
 void BossEnemy::UnLoad()

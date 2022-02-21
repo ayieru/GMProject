@@ -180,6 +180,7 @@
     <ClCompile Include="skydoom.cpp" />
     <ClCompile Include="spawn.cpp" />
     <ClCompile Include="title.cpp" />
+    <ClCompile Include="tutorial.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UI_life.cpp" />
     <ClCompile Include="UI_sp.cpp" />
@@ -216,6 +217,7 @@
     <ClInclude Include="time.h" />
     <ClInclude Include="title.h" />
     <ClInclude Include="Toul.h" />
+    <ClInclude Include="tutorial.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="UI_life.h" />
     <ClInclude Include="UI_sp.h" />

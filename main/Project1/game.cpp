@@ -23,6 +23,7 @@
 #include "spawn.h"
 #include "boss.h"
 #include "score.h"
+#include "title.h"
 #include "spawnload.h"
 
 
@@ -55,5 +56,13 @@ void Game::Update()
 
 	if (GetAsyncKeyState(VK_F1)) {
 		Manager::SetScene<Game>();
+	}
+
+	if (GetAsyncKeyState(VK_ESCAPE)) {
+		int on_button;
+		on_button = MessageBox(NULL, TEXT("タイトルに戻りますか？"), TEXT("タイトルに戻る"), MB_YESNO);
+		if (on_button == IDYES) {
+			Manager::SetScene<Title>();
+		}
 	}
 }

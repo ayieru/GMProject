@@ -18,6 +18,7 @@ enum class EnemyState {
     B,
     C,
     D,
+    boss,
 };
 
 class GameObject
