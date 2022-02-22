@@ -35,8 +35,8 @@ void BossEnemy::Init()
 		life[i] = MAXLIFE * (MAXENEMY - i);
 	}
 
-	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "vertexLightingVS.cso");
-	Renderer::CreatePixelShader(&PixelShader, "vertexLightingPS.cso");
+	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "Asset\\cso\\vertexLightingVS.cso");
+	Renderer::CreatePixelShader(&PixelShader, "Asset\\cso\\vertexLightingPS.cso");
 
 	rot = 0.f;
 	fsin = 0.f;

@@ -24,8 +24,8 @@ void Enemy::Init()
 	Rotation = D3DXVECTOR3(0.0f, (float)std::_Pi, 0.0f);
 	Scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 
-	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "vertexLightingVS.cso");
-	Renderer::CreatePixelShader(&PixelShader, "vertexLightingPS.cso");
+	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "Asset\\cso\\vertexLightingVS.cso");
+	Renderer::CreatePixelShader(&PixelShader, "Asset\\cso\\vertexLightingPS.cso");
 }
 
 void Enemy::Uninit()

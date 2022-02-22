@@ -30,8 +30,8 @@ void Bullet::Init()
 
 	se = Manager::GetScene()->AddGameObject<Audio>(2);
 
-	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "vertexLightingVS.cso");
-	Renderer::CreatePixelShader(&PixelShader, "vertexLightingPS.cso");
+	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "Asset\\cso\\vertexLightingVS.cso");
+	Renderer::CreatePixelShader(&PixelShader, "Asset\\cso\\vertexLightingPS.cso");
 }
 
 void Bullet::Uninit()

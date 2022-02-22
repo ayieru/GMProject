@@ -53,9 +53,9 @@ void Field::Init()
 
 	assert(Texture);
 
-	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "unlitTextureVS.cso");
+	Renderer::CreateVertexShader(&VertexShader, &VertexLayout, "Asset\\cso\\unlitTextureVS.cso");
 
-	Renderer::CreatePixelShader(&PixelShader, "unlitTexturePS.cso");
+	Renderer::CreatePixelShader(&PixelShader, "Asset\\cso\\unlitTexturePS.cso");
 
 	Position = D3DXVECTOR3(-25.0f, -40.0f, 10.0f);
 	Rotation = D3DXVECTOR3(0.0f, 0.0f, 0.0f);

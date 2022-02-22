@@ -1,4 +1,5 @@
-﻿  an error occurred while setting the initial search directory.
-  searches will be relative to the application's starting directory.
-  compilation failed; no code produced
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(1759,5): error MSB6006: "fxc.exe" はコード 1 を伴って終了しました。
+﻿  compilation object save succeeded; see F:\GMProject\main\Project1\unlitTexturePS.cso
+  compilation object save succeeded; see F:\GMProject\main\Project1\unlitTextureVS.cso
+  compilation object save succeeded; see F:\GMProject\main\Project1\vertexLightingPS.cso
+  compilation object save succeeded; see F:\GMProject\main\Project1\vertexLightingVS.cso
+  Project1.vcxproj -> F:\GMProject\main\Release\Project1.exe
