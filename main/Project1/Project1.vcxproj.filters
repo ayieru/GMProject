@@ -183,19 +183,19 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="common.hlsl">
+    <FxCompile Include="Asset\cso\common.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
-    <FxCompile Include="unlitTexturePS.hlsl">
+    <FxCompile Include="Asset\cso\unlitTexturePS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
-    <FxCompile Include="unlitTextureVS.hlsl">
+    <FxCompile Include="Asset\cso\unlitTextureVS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
-    <FxCompile Include="vertexLightingPS.hlsl">
+    <FxCompile Include="Asset\cso\vertexLightingPS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
-    <FxCompile Include="vertexLightingVS.hlsl">
+    <FxCompile Include="Asset\cso\vertexLightingVS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
   </ItemGroup>
